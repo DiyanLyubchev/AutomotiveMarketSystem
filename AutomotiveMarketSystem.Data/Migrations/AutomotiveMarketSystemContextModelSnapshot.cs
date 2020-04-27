@@ -24,9 +24,13 @@ namespace AutomotiveMarketSystem.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CarId");
+                    b.Property<int>("CarId")
+                        .HasColumnName("CARID")
+                        .HasColumnType("NUMBER(10)");
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserId")
+                        .HasColumnName("USERID")
+                        .HasColumnType("VARCHAR2(450)");
 
                     b.HasKey("Id");
 
@@ -35,7 +39,7 @@ namespace AutomotiveMarketSystem.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Advertisement");
+                    b.ToTable("ADVERTISEMENTS");
                 });
 
             modelBuilder.Entity("AutomotiveMarketSystem.Data.Models.Car", b =>
@@ -84,11 +88,35 @@ namespace AutomotiveMarketSystem.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("EngineType");
+                    b.Property<string>("EngineType")
+                        .HasColumnName("ENGINETYPE")
+                        .HasColumnType("VARCHAR2(50)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("EngineTypeStatus");
+                    b.ToTable("ENGINETYPESTATUS");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EngineType = "Gas"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EngineType = "Diesel"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EngineType = "Electric"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            EngineType = "Hybrid"
+                        });
                 });
 
             modelBuilder.Entity("AutomotiveMarketSystem.Data.Models.User", b =>
@@ -139,6 +167,40 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "c23c3678-6194-4b7e-a928-09614190eb62",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "1f3782cb-9be4-4501-a60d-449ed34e22d8",
+                            Email = "admin1@admin.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "ADMIN1@ADMIN.COM",
+                            NormalizedUserName = "DIYAN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC/VpaY1fj7x4UM2H6aAxCvxbPNQvGbB65d6AT8wDsDKKH/+hP/P3O1tuYahQxCOTw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN",
+                            TwoFactorEnabled = false,
+                            UserName = "Diyan"
+                        },
+                        new
+                        {
+                            Id = "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "2b118491-cbcb-415f-b3f5-7345ed962714",
+                            Email = "admin2@admin.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "ADMIN2@ADMIN.COM",
+                            NormalizedUserName = "IVAN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEA+1TKf+0GsW0PlDakpzaDpF2lFSjBEzcdEem2j7rk0mIQ+yjVI6whVtNEtI0GkPkA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU",
+                            TwoFactorEnabled = false,
+                            UserName = "Ivan"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -236,6 +298,18 @@ namespace AutomotiveMarketSystem.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "c23c3678-6194-4b7e-a928-09614190eb62",
+                            RoleId = "ca678235-7571-4177-984f-e9d1957b0187"
+                        },
+                        new
+                        {
+                            UserId = "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c",
+                            RoleId = "ca678235-7571-4177-984f-e9d1957b0187"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -260,6 +334,15 @@ namespace AutomotiveMarketSystem.Data.Migrations
                     b.ToTable("UserRole");
 
                     b.HasDiscriminator().HasValue("UserRole");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "ca678235-7571-4177-984f-e9d1957b0187",
+                            ConcurrencyStamp = "9a21ca04-1d7b-44ea-9794-39bcfee0ed6a",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("AutomotiveMarketSystem.Data.Models.Advertisement", b =>
@@ -269,7 +352,7 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         .HasForeignKey("AutomotiveMarketSystem.Data.Models.Advertisement", "CarId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("AutomotiveMarketSystem.Data.Models.User", "Users")
+                    b.HasOne("AutomotiveMarketSystem.Data.Models.User", "User")
                         .WithMany("Advertisements")
                         .HasForeignKey("UserId");
                 });

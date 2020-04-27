@@ -6,12 +6,12 @@ using System.Text;
 
 namespace AutomotiveMarketSystem.Data.Models
 {
-    [Table("Advertisement")]
+    [Table("Advertisements")]
     public class Advertisement : BaseEntity
     {
         public string UserId { get; set; }
 
-        public virtual User Users { get; set; }
+        public virtual User User { get; set; }
 
         [ForeignKey("Car")]
         public int CarId { get; set; }

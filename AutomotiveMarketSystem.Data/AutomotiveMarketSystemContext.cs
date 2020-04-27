@@ -29,7 +29,6 @@ namespace AutomotiveMarketSystem.Data
         {
             builder.Entity<Car>(entity =>
             {
-
                 entity.ToTable("CAR");
 
                 entity.HasKey(key => key.Id);
@@ -61,6 +60,37 @@ namespace AutomotiveMarketSystem.Data
                 entity.HasOne(adv => adv.Advertisement).WithOne(car => car.Car);
 
                 entity.HasOne(engineType => engineType.EngineType).WithOne(car => car.Car);
+            });
+
+
+            builder.Entity<Advertisement>(entity =>
+            {
+                entity.ToTable("ADVERTISEMENTS");
+
+                entity.HasKey(key => key.Id);
+
+                entity.Property(userId => userId.UserId)
+                    .HasColumnName("USERID")
+                    .HasColumnType("NVARCHAR(450)");
+
+                entity.Property(carId => carId.CarId)
+                 .HasColumnName("CARID")
+                 .HasColumnType("NUMBER(10)");
+
+                entity.HasOne(user => user.User).WithMany(adv => adv.Advertisements);
+            });
+
+            builder.Entity<EngineTypeStatus>(entity =>
+            {
+                entity.ToTable("ENGINETYPESTATUS");
+
+                entity.HasKey(key => key.Id);
+
+                entity.Property(etype => etype.EngineType)
+                    .HasColumnName("ENGINETYPE")
+                    .HasColumnType("VARCHAR2(50)");
+
+                entity.HasOne(car=> car.Car).WithOne(type => type.EngineType);
             });
 
             builder.SeedUserRoles();
