@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +9,13 @@ using Microsoft.Extensions.DependencyInjection;
 using AutomotiveMarketSystem.Data;
 using AutomotiveMarketSystem.Data.Models;
 using System;
-using AutoMapper;
 using AutomotiveMarketSystem.Extentions;
+<<<<<<< refs/remotes/origin/WipService
 using AutomotiveMarketSystem.Service.Contracts;
 using AutomotiveMarketSystem.Service;
+=======
+using AutoMapper;
+>>>>>>> Add Auto mapper library
 
 namespace AutomotiveMarketSystem
 {
