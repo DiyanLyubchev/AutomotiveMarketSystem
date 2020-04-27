@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using AutomotiveMarketSystem.Data;
 using AutomotiveMarketSystem.Data.Models;
 using System;
+using AutoMapper;
+using AutomotiveMarketSystem.Extentions;
 
 namespace AutomotiveMarketSystem
 {
@@ -32,28 +34,6 @@ namespace AutomotiveMarketSystem
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.Configure<IdentityOptions>(options =>
-            {
-                // Password settings.
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequiredLength = 5;
-                options.Password.RequiredUniqueChars = 0;
-
-                // Lockout settings.
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                options.Lockout.MaxFailedAccessAttempts = 5;
-                options.Lockout.AllowedForNewUsers = true;
-
-                // User settings.
-                options.User.AllowedUserNameCharacters =
-                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-                options.User.RequireUniqueEmail = false;
-
-            });
-
             services.ConfigureApplicationCookie(options =>
             {
                 // Cookie settings
@@ -65,6 +45,7 @@ namespace AutomotiveMarketSystem
                 options.SlidingExpiration = true;
             });
 
+            services.IdentityOptions();
 
             services.AddDbContext<AutomotiveMarketSystemContext>(options =>
                       options.UseOracle(
@@ -73,6 +54,7 @@ namespace AutomotiveMarketSystem
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddIdentity<User, UserRole>()
                     .AddEntityFrameworkStores<AutomotiveMarketSystemContext>()
