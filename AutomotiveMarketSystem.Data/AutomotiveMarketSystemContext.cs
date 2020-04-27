@@ -1,5 +1,6 @@
 ﻿using AutomotiveMarketSystem.Data.Models;
 using AutomotiveMarketSystem.Data.Seed;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -69,10 +70,6 @@ namespace AutomotiveMarketSystem.Data
 
                 entity.HasKey(key => key.Id);
 
-                entity.Property(userId => userId.UserId)
-                    .HasColumnName("USERID")
-                    .HasColumnType("NVARCHAR(450)");
-
                 entity.Property(carId => carId.CarId)
                  .HasColumnName("CARID")
                  .HasColumnType("NUMBER(10)");
@@ -93,9 +90,24 @@ namespace AutomotiveMarketSystem.Data
                 entity.HasOne(car=> car.Car).WithOne(type => type.EngineType);
             });
 
+            //builder.Entity<UserRole>(entity =>
+            //{
+            //    entity.ToTable("ASPNETROLES");
+
+            //    entity.HasKey(key => key.Id);
+
+            //    entity.Property(etype => etype.Name)
+            //        .HasColumnName("NAME")
+            //        .HasColumnType("NVARCHAR2(256)");
+
+            //    entity.Property(etype => etype.NormalizedName)
+            //       .HasColumnName("NORMALIZEDNAME")
+            //       .HasColumnType("NVARCHAR2(256)");
+            //});
+
             builder.SeedUserRoles();
             builder.SeedEngine();
             base.OnModelCreating(builder);
-        }
+        } 
     }
 }
