@@ -12,6 +12,8 @@ using AutomotiveMarketSystem.Data.Models;
 using System;
 using AutoMapper;
 using AutomotiveMarketSystem.Extentions;
+using AutomotiveMarketSystem.Service.Contracts;
+using AutomotiveMarketSystem.Service;
 
 namespace AutomotiveMarketSystem
 {
@@ -46,6 +48,9 @@ namespace AutomotiveMarketSystem
             });
 
             services.IdentityOptions();
+
+            services.AddScoped<ICarService, CarService>();
+            services.AddScoped<IAdvertisementService, AdvertisementService>();
 
             services.AddDbContext<AutomotiveMarketSystemContext>(options =>
                       options.UseOracle(
