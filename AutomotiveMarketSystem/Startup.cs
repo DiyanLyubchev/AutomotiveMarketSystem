@@ -10,7 +10,16 @@ using AutomotiveMarketSystem.Data;
 using AutomotiveMarketSystem.Data.Models;
 using System;
 using AutomotiveMarketSystem.Extentions;
+<<<<<<< HEAD
+<<<<<<< refs/remotes/origin/WipService
+using AutomotiveMarketSystem.Service.Contracts;
+using AutomotiveMarketSystem.Service;
+=======
 using AutoMapper;
+>>>>>>> Add Auto mapper library
+=======
+using AutoMapper;
+>>>>>>> WipUI
 
 namespace AutomotiveMarketSystem
 {
@@ -45,6 +54,9 @@ namespace AutomotiveMarketSystem
             });
 
             services.IdentityOptions();
+
+            services.AddScoped<ICarService, CarService>();
+            services.AddScoped<IAdvertisementService, AdvertisementService>();
 
             services.AddDbContext<AutomotiveMarketSystemContext>(options =>
                       options.UseOracle(
