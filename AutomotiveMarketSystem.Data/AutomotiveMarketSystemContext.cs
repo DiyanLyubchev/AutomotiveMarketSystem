@@ -4,6 +4,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace AutomotiveMarketSystem.Data
 {
@@ -21,11 +26,11 @@ namespace AutomotiveMarketSystem.Data
         public virtual DbSet<Advertisement> Advertisements { get; set; }
 
         public virtual DbSet<Car> Cars { get; set; }
-
+        public virtual DbSet<CarBrand> CarBrands { get; set; }
+        public virtual DbSet<CarModel> CarModels { get; set; }
         public virtual DbSet<EngineTypeStatus> StatusEngines { get; set; }
-
         public virtual DbSet<UserRole> UserRoles { get; set; }
-
+       
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Car>(entity =>
@@ -34,13 +39,13 @@ namespace AutomotiveMarketSystem.Data
 
                 entity.HasKey(key => key.Id);
 
-                entity.Property(carMake => carMake.Make)
-                    .HasColumnName("MAKE")
-                    .HasColumnType("VARCHAR2(50)");
+                //entity.Property(carMake => carMake.C)
+                //    .HasColumnName("MAKE")
+                //    .HasColumnType("VARCHAR2(50)");
 
-                entity.Property(model => model.CarModel)
-                    .HasColumnName("CARMODEL")
-                    .HasColumnType("VARCHAR2(50)");
+                entity.Property(brand => brand.CarBrandId)
+                    .HasColumnName("CARBRANDID")
+                    .HasColumnType("NUMBER(10)");
 
                 entity.Property(engine => engine.Engine)
                   .HasColumnName("ENGINE")
@@ -59,6 +64,8 @@ namespace AutomotiveMarketSystem.Data
                  .HasColumnType("NUMBER");
 
                 entity.HasOne(adv => adv.Advertisement).WithOne(car => car.Car);
+                entity.HasOne(brand => brand.CarBrand).WithMany(x => x.Cars);
+
 
                 entity.HasOne(engineType => engineType.EngineType).WithOne(car => car.Car);
             });
@@ -87,7 +94,46 @@ namespace AutomotiveMarketSystem.Data
                     .HasColumnName("ENGINETYPE")
                     .HasColumnType("VARCHAR2(50)");
 
-                entity.HasOne(car=> car.Car).WithOne(type => type.EngineType);
+                entity.HasOne(car => car.Car).WithOne(type => type.EngineType);
+            });
+
+            builder.Entity<CarBrand>(entity =>
+            {
+                entity.ToTable("CARBRAND");
+
+                entity.HasKey(key => key.Id);
+
+                entity.Property(name => name.BrandName)
+                 .HasColumnName("BRANDNAME")
+                 .HasColumnType("VARCHAR2(50)");
+
+                //entity.Property(model => model.BrandModels)
+                // .HasColumnName("BRANDMODEL")
+                // .HasColumnType("VARCHAR2(200)");
+
+                entity.HasMany(brandModels => brandModels.BrandModels)
+                .WithOne(brand => brand.CarBrand);
+
+                entity.HasMany(cars => cars.Cars)
+                .WithOne(brand => brand.CarBrand);
+            });
+
+            builder.Entity<CarModel>(entity =>
+            {
+                entity.ToTable("CARMODEL");
+
+                entity.HasKey(key => key.Id);
+
+                entity.Property(name => name.ModelName)
+                 .HasColumnName("MODELNAME")
+                 .HasColumnType("VARCHAR(50)");
+
+                entity.Property(name => name.CarBrandId)
+                .HasColumnName("CARBRANDID")
+                .HasColumnType("NUMBER(10)");
+
+                entity.HasOne(brand => brand.CarBrand)
+                .WithMany(brand => brand.BrandModels);
             });
 
             //builder.Entity<UserRole>(entity =>
@@ -107,7 +153,9 @@ namespace AutomotiveMarketSystem.Data
 
             builder.SeedUserRoles();
             builder.SeedEngine();
+            builder.SeedBrands();
+            builder.SeedModels();
             base.OnModelCreating(builder);
-        } 
+        }
     }
 }

@@ -49,6 +49,19 @@ namespace AutomotiveMarketSystem.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CARBRAND",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Oracle:ValueGenerationStrategy", OracleValueGenerationStrategy.IdentityColumn),
+                    BRANDNAME = table.Column<string>(type: "VARCHAR2(50)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CARBRAND", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ENGINETYPESTATUS",
                 columns: table => new
                 {
@@ -168,13 +181,32 @@ namespace AutomotiveMarketSystem.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CARMODEL",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Oracle:ValueGenerationStrategy", OracleValueGenerationStrategy.IdentityColumn),
+                    MODELNAME = table.Column<string>(type: "VARCHAR(50)", nullable: true),
+                    CARBRANDID = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CARMODEL", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CARMODEL_CARBRAND_CARBRANDID",
+                        column: x => x.CARBRANDID,
+                        principalTable: "CARBRAND",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CAR",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Oracle:ValueGenerationStrategy", OracleValueGenerationStrategy.IdentityColumn),
-                    MAKE = table.Column<string>(type: "VARCHAR2(50)", nullable: true),
-                    CARMODEL = table.Column<string>(type: "VARCHAR2(50)", nullable: true),
+                    CARBRANDID = table.Column<int>(type: "NUMBER(10)", nullable: false),
                     ENGINE = table.Column<int>(type: "NUMBER(10)", nullable: false),
                     DOOR = table.Column<int>(type: "NUMBER(10)", nullable: false),
                     PRODUCTIONYEAR = table.Column<DateTime>(type: "DATE", nullable: false),
@@ -185,6 +217,12 @@ namespace AutomotiveMarketSystem.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CAR", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CAR_CARBRAND_CARBRANDID",
+                        column: x => x.CARBRANDID,
+                        principalTable: "CARBRAND",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CAR_ENGINETYPESTATUS_EngineTypeStatusId",
                         column: x => x.EngineTypeStatusId,
@@ -222,15 +260,24 @@ namespace AutomotiveMarketSystem.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Discriminator", "Name", "NormalizedName" },
-                values: new object[] { "ca678235-7571-4177-984f-e9d1957b0187", "445c1ef3-a82c-43d1-a8b5-20ddf832cd88", "UserRole", "Admin", "ADMIN" });
+                values: new object[] { "ca678235-7571-4177-984f-e9d1957b0187", "92237e4a-e193-44ae-82d2-5a340f3ea298", "UserRole", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "c23c3678-6194-4b7e-a928-09614190eb62", 0, "c8ee8452-7d64-48fc-8c6a-05bccda67970", "admin1@admin.com", false, true, null, "ADMIN1@ADMIN.COM", "DIYAN", "AQAAAAEAACcQAAAAELnSc8cdFyTDnX4qugvWpdcq7oCb+4x/TzM25W6MwnxXEpeK2dd1J7RWd1jODR7GFQ==", null, false, "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN", false, "Diyan" },
-                    { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", 0, "7c547f96-8221-4a78-96c2-617ebb5d4fb1", "admin2@admin.com", false, true, null, "ADMIN2@ADMIN.COM", "IVAN", "AQAAAAEAACcQAAAAENbd0u0EWu4P3IcSFLyk7NzOhHr+CfqvsJmfMnCILD/e3yV6RYb1PPRsJ9uDPbiAYg==", null, false, "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU", false, "Ivan" }
+                    { "c23c3678-6194-4b7e-a928-09614190eb62", 0, "4952d522-a862-4544-83e6-cbeab6f85070", "admin1@admin.com", false, true, null, "ADMIN1@ADMIN.COM", "DIYAN", "AQAAAAEAACcQAAAAENXgIFbhPnTwwMIJqW5USRb7VbDdRlmHsaUYY6JGUCmtVNaVHIkyrzTv1nYv0bZjtg==", null, false, "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN", false, "Diyan" },
+                    { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", 0, "b1a7f4ae-d1e2-41ad-b28a-02a3335b3383", "admin2@admin.com", false, true, null, "ADMIN2@ADMIN.COM", "IVAN", "AQAAAAEAACcQAAAAELZ2Ux6w8hhKBf0I8KoK7UvmbLEYBEqgFMmV4tR+HYZvIxt543/Q7x1UUwWdQvG8og==", null, false, "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU", false, "Ivan" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "CARBRAND",
+                columns: new[] { "Id", "BRANDNAME" },
+                values: new object[,]
+                {
+                    { 1, "Seat" },
+                    { 2, "Renault" }
                 });
 
             migrationBuilder.InsertData(
@@ -247,12 +294,20 @@ namespace AutomotiveMarketSystem.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "UserId", "RoleId" },
-                values: new object[] { "c23c3678-6194-4b7e-a928-09614190eb62", "ca678235-7571-4177-984f-e9d1957b0187" });
+                values: new object[,]
+                {
+                    { "c23c3678-6194-4b7e-a928-09614190eb62", "ca678235-7571-4177-984f-e9d1957b0187" },
+                    { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", "ca678235-7571-4177-984f-e9d1957b0187" }
+                });
 
             migrationBuilder.InsertData(
-                table: "AspNetUserRoles",
-                columns: new[] { "UserId", "RoleId" },
-                values: new object[] { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", "ca678235-7571-4177-984f-e9d1957b0187" });
+                table: "CARMODEL",
+                columns: new[] { "Id", "CARBRANDID", "MODELNAME" },
+                values: new object[,]
+                {
+                    { 1, 1, "Alhambra" },
+                    { 2, 1, "Ibiza" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ADVERTISEMENTS_CARID",
@@ -303,10 +358,20 @@ namespace AutomotiveMarketSystem.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_CAR_CARBRANDID",
+                table: "CAR",
+                column: "CARBRANDID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CAR_EngineTypeStatusId",
                 table: "CAR",
                 column: "EngineTypeStatusId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CARMODEL_CARBRANDID",
+                table: "CARMODEL",
+                column: "CARBRANDID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -330,6 +395,9 @@ namespace AutomotiveMarketSystem.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "CARMODEL");
+
+            migrationBuilder.DropTable(
                 name: "CAR");
 
             migrationBuilder.DropTable(
@@ -337,6 +405,9 @@ namespace AutomotiveMarketSystem.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "CARBRAND");
 
             migrationBuilder.DropTable(
                 name: "ENGINETYPESTATUS");

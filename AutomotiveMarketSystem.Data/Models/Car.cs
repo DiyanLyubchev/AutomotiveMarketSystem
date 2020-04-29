@@ -10,9 +10,10 @@ namespace AutomotiveMarketSystem.Data.Models
     [Table("Car")]
     public class Car : BaseEntity
     {
-        public string Make { get; set; }
+        public CarBrand CarBrand { get; set; }
+        public int CarBrandId { get; set; }
 
-        public string CarModel { get; set; }
+        //public string CarModel { get; set; }
 
         public int Engine { get; set; }
 
