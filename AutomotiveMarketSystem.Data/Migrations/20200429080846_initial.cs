@@ -260,15 +260,15 @@ namespace AutomotiveMarketSystem.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Discriminator", "Name", "NormalizedName" },
-                values: new object[] { "ca678235-7571-4177-984f-e9d1957b0187", "92237e4a-e193-44ae-82d2-5a340f3ea298", "UserRole", "Admin", "ADMIN" });
+                values: new object[] { "ca678235-7571-4177-984f-e9d1957b0187", "70484d29-0390-4b4f-97a6-d2b3a1fb2db9", "UserRole", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "c23c3678-6194-4b7e-a928-09614190eb62", 0, "4952d522-a862-4544-83e6-cbeab6f85070", "admin1@admin.com", false, true, null, "ADMIN1@ADMIN.COM", "DIYAN", "AQAAAAEAACcQAAAAENXgIFbhPnTwwMIJqW5USRb7VbDdRlmHsaUYY6JGUCmtVNaVHIkyrzTv1nYv0bZjtg==", null, false, "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN", false, "Diyan" },
-                    { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", 0, "b1a7f4ae-d1e2-41ad-b28a-02a3335b3383", "admin2@admin.com", false, true, null, "ADMIN2@ADMIN.COM", "IVAN", "AQAAAAEAACcQAAAAELZ2Ux6w8hhKBf0I8KoK7UvmbLEYBEqgFMmV4tR+HYZvIxt543/Q7x1UUwWdQvG8og==", null, false, "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU", false, "Ivan" }
+                    { "c23c3678-6194-4b7e-a928-09614190eb62", 0, "993ea0f8-5e98-4715-81fb-3d92f8f98258", "admin1@admin.com", false, true, null, "ADMIN1@ADMIN.COM", "DIYAN", "AQAAAAEAACcQAAAAEE03mjua8y6TqBWsQQJ9oRIIqaCjRaXx1uePSFMEEd+3Fu5ha35V2Lsu8PsrO2MhFQ==", null, false, "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN", false, "Diyan" },
+                    { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", 0, "d06cb92e-0fdd-4aad-bc55-be484750136e", "admin2@admin.com", false, true, null, "ADMIN2@ADMIN.COM", "IVAN", "AQAAAAEAACcQAAAAEHEKGf8W5ipTwjj3kzaoOFjzqWtbxmB0nfeJN5phKeyz7FHxH8VGcCWiS+95ZCEnfg==", null, false, "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU", false, "Ivan" }
                 });
 
             migrationBuilder.InsertData(
@@ -276,8 +276,8 @@ namespace AutomotiveMarketSystem.Data.Migrations
                 columns: new[] { "Id", "BRANDNAME" },
                 values: new object[,]
                 {
-                    { 1, "Seat" },
-                    { 2, "Renault" }
+                    { 1, "Alfa Romeo" },
+                    { 2, "Audi" }
                 });
 
             migrationBuilder.InsertData(
@@ -296,8 +296,8 @@ namespace AutomotiveMarketSystem.Data.Migrations
                 columns: new[] { "UserId", "RoleId" },
                 values: new object[,]
                 {
-                    { "c23c3678-6194-4b7e-a928-09614190eb62", "ca678235-7571-4177-984f-e9d1957b0187" },
-                    { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", "ca678235-7571-4177-984f-e9d1957b0187" }
+                    { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", "ca678235-7571-4177-984f-e9d1957b0187" },
+                    { "c23c3678-6194-4b7e-a928-09614190eb62", "ca678235-7571-4177-984f-e9d1957b0187" }
                 });
 
             migrationBuilder.InsertData(
@@ -305,8 +305,21 @@ namespace AutomotiveMarketSystem.Data.Migrations
                 columns: new[] { "Id", "CARBRANDID", "MODELNAME" },
                 values: new object[,]
                 {
-                    { 1, 1, "Alhambra" },
-                    { 2, 1, "Ibiza" }
+                    { 15, 2, "A8" },
+                    { 14, 2, "A6" },
+                    { 13, 2, "A4" },
+                    { 12, 2, "A4" },
+                    { 11, 2, "A3 Sportback" },
+                    { 10, 2, "A3 Cabriolet" },
+                    { 9, 2, "A3" },
+                    { 7, 2, "A1" },
+                    { 6, 1, "Giulia" },
+                    { 5, 1, "Giulietta" },
+                    { 4, 1, "Spider" },
+                    { 3, 1, "Brera" },
+                    { 2, 1, "159 Sportwagon" },
+                    { 8, 2, "A2" },
+                    { 1, 1, "159" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -96,12 +96,12 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         new
                         {
                             Id = 1,
-                            BrandName = "Seat"
+                            BrandName = "Alfa Romeo"
                         },
                         new
                         {
                             Id = 2,
-                            BrandName = "Renault"
+                            BrandName = "Audi"
                         });
                 });
 
@@ -129,13 +129,91 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         {
                             Id = 1,
                             CarBrandId = 1,
-                            ModelName = "Alhambra"
+                            ModelName = "159"
                         },
                         new
                         {
                             Id = 2,
                             CarBrandId = 1,
-                            ModelName = "Ibiza"
+                            ModelName = "159 Sportwagon"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CarBrandId = 1,
+                            ModelName = "Brera"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CarBrandId = 1,
+                            ModelName = "Spider"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CarBrandId = 1,
+                            ModelName = "Giulietta"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CarBrandId = 1,
+                            ModelName = "Giulia"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CarBrandId = 2,
+                            ModelName = "A1"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CarBrandId = 2,
+                            ModelName = "A2"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CarBrandId = 2,
+                            ModelName = "A3"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CarBrandId = 2,
+                            ModelName = "A3 Cabriolet"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CarBrandId = 2,
+                            ModelName = "A3 Sportback"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CarBrandId = 2,
+                            ModelName = "A4"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CarBrandId = 2,
+                            ModelName = "A4"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CarBrandId = 2,
+                            ModelName = "A6"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CarBrandId = 2,
+                            ModelName = "A8"
                         });
                 });
 
@@ -229,13 +307,13 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         {
                             Id = "c23c3678-6194-4b7e-a928-09614190eb62",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4952d522-a862-4544-83e6-cbeab6f85070",
+                            ConcurrencyStamp = "993ea0f8-5e98-4715-81fb-3d92f8f98258",
                             Email = "admin1@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN1@ADMIN.COM",
                             NormalizedUserName = "DIYAN",
-                            PasswordHash = "AQAAAAEAACcQAAAAENXgIFbhPnTwwMIJqW5USRb7VbDdRlmHsaUYY6JGUCmtVNaVHIkyrzTv1nYv0bZjtg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEE03mjua8y6TqBWsQQJ9oRIIqaCjRaXx1uePSFMEEd+3Fu5ha35V2Lsu8PsrO2MhFQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN",
                             TwoFactorEnabled = false,
@@ -245,13 +323,13 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         {
                             Id = "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b1a7f4ae-d1e2-41ad-b28a-02a3335b3383",
+                            ConcurrencyStamp = "d06cb92e-0fdd-4aad-bc55-be484750136e",
                             Email = "admin2@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN2@ADMIN.COM",
                             NormalizedUserName = "IVAN",
-                            PasswordHash = "AQAAAAEAACcQAAAAELZ2Ux6w8hhKBf0I8KoK7UvmbLEYBEqgFMmV4tR+HYZvIxt543/Q7x1UUwWdQvG8og==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHEKGf8W5ipTwjj3kzaoOFjzqWtbxmB0nfeJN5phKeyz7FHxH8VGcCWiS+95ZCEnfg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU",
                             TwoFactorEnabled = false,
@@ -395,7 +473,7 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         new
                         {
                             Id = "ca678235-7571-4177-984f-e9d1957b0187",
-                            ConcurrencyStamp = "92237e4a-e193-44ae-82d2-5a340f3ea298",
+                            ConcurrencyStamp = "70484d29-0390-4b4f-97a6-d2b3a1fb2db9",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

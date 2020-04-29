@@ -1,12 +1,77 @@
 [
   {
     "id": 1,
-    "modelName": "Alhambra",
+    "modelName": "159",
     "carBrandId": 1
   },
   {
     "id": 2,
-    "modelName": "Ibiza",
+    "modelName": "159 Sportwagon",
     "carBrandId": 1
+  },
+  {
+    "id": 3,
+    "modelName": "Brera",
+    "carBrandId": 1
+  },
+  {
+    "id": 4,
+    "modelName": "Spider",
+    "carBrandId": 1
+  },
+  {
+    "id": 5,
+    "modelName": "Giulietta",
+    "carBrandId": 1
+  },
+  {
+    "id": 6,
+    "modelName": "Giulia",
+    "carBrandId": 1
+  },
+  {
+    "id": 7,
+    "modelName": "A1",
+    "carBrandId": 2
+  },
+  {
+    "id": 8,
+    "modelName": "A2",
+    "carBrandId": 2
+  },
+  {
+    "id": 9,
+    "modelName": "A3",
+    "carBrandId": 2
+  },
+  {
+    "id": 10,
+    "modelName": "A3 Cabriolet",
+    "carBrandId": 2
+  },
+  {
+    "id": 11,
+    "modelName": "A3 Sportback",
+    "carBrandId": 2
+  },
+  {
+    "id": 12,
+    "modelName": "A4",
+    "carBrandId": 2
+  },
+  {
+    "id": 13,
+    "modelName": "A4",
+    "carBrandId": 2
+  },
+  {
+    "id": 14,
+    "modelName": "A6",
+    "carBrandId": 2
+  },
+  {
+    "id": 15,
+    "modelName": "A8",
+    "carBrandId": 2
   }
 ]
