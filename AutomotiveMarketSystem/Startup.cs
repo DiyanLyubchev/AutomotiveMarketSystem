@@ -10,12 +10,22 @@ using AutomotiveMarketSystem.Data;
 using AutomotiveMarketSystem.Data.Models;
 using System;
 using AutomotiveMarketSystem.Extentions;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> WipUI
 <<<<<<< refs/remotes/origin/WipService
 using AutomotiveMarketSystem.Service.Contracts;
 using AutomotiveMarketSystem.Service;
 =======
 using AutoMapper;
 >>>>>>> Add Auto mapper library
+<<<<<<< HEAD
+=======
+=======
+using AutoMapper;
+>>>>>>> WipUI
+>>>>>>> WipUI
 
 namespace AutomotiveMarketSystem
 {
