@@ -4,6 +4,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace AutomotiveMarketSystem.Data
@@ -26,7 +30,7 @@ namespace AutomotiveMarketSystem.Data
         public virtual DbSet<CarModel> CarModels { get; set; }
         public virtual DbSet<EngineTypeStatus> StatusEngines { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
-
+       
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Car>(entity =>
@@ -61,7 +65,7 @@ namespace AutomotiveMarketSystem.Data
 
                 entity.HasOne(adv => adv.Advertisement).WithOne(car => car.Car);
                 entity.HasOne(brand => brand.CarBrand).WithMany(x => x.Cars);
-               
+
 
                 entity.HasOne(engineType => engineType.EngineType).WithOne(car => car.Car);
             });
@@ -90,7 +94,7 @@ namespace AutomotiveMarketSystem.Data
                     .HasColumnName("ENGINETYPE")
                     .HasColumnType("VARCHAR2(50)");
 
-                entity.HasOne(car=> car.Car).WithOne(type => type.EngineType);
+                entity.HasOne(car => car.Car).WithOne(type => type.EngineType);
             });
 
             builder.Entity<CarBrand>(entity =>
@@ -101,7 +105,11 @@ namespace AutomotiveMarketSystem.Data
 
                 entity.Property(name => name.BrandName)
                  .HasColumnName("BRANDNAME")
-                 .HasColumnType("VARCHAR(50)");
+                 .HasColumnType("VARCHAR2(50)");
+
+                //entity.Property(model => model.BrandModels)
+                // .HasColumnName("BRANDMODEL")
+                // .HasColumnType("VARCHAR2(200)");
 
                 entity.HasMany(brandModels => brandModels.BrandModels)
                 .WithOne(brand => brand.CarBrand);
@@ -145,7 +153,9 @@ namespace AutomotiveMarketSystem.Data
 
             builder.SeedUserRoles();
             builder.SeedEngine();
+            builder.SeedBrands();
+            builder.SeedModels();
             base.OnModelCreating(builder);
-        } 
+        }
     }
 }

@@ -54,7 +54,7 @@ namespace AutomotiveMarketSystem.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Oracle:ValueGenerationStrategy", OracleValueGenerationStrategy.IdentityColumn),
-                    BRANDNAME = table.Column<string>(type: "VARCHAR(50)", nullable: true)
+                    BRANDNAME = table.Column<string>(type: "VARCHAR2(50)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -260,15 +260,24 @@ namespace AutomotiveMarketSystem.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Discriminator", "Name", "NormalizedName" },
-                values: new object[] { "ca678235-7571-4177-984f-e9d1957b0187", "8e30809c-ebdc-46f2-90b1-7cc374a14110", "UserRole", "Admin", "ADMIN" });
+                values: new object[] { "ca678235-7571-4177-984f-e9d1957b0187", "92237e4a-e193-44ae-82d2-5a340f3ea298", "UserRole", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "c23c3678-6194-4b7e-a928-09614190eb62", 0, "816a7a6b-f0e4-4e9c-9549-01dd8ed7aeb2", "admin1@admin.com", false, true, null, "ADMIN1@ADMIN.COM", "DIYAN", "AQAAAAEAACcQAAAAEF+0V5DvKbXLUoyRTJod0HFkNWvIopOhX/xGs6NH7wLtB8CRxqXekFTM6K0r5fblDg==", null, false, "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN", false, "Diyan" },
-                    { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", 0, "1f70ba12-e9c5-4a66-8b50-b29cc8be62e1", "admin2@admin.com", false, true, null, "ADMIN2@ADMIN.COM", "IVAN", "AQAAAAEAACcQAAAAED4OHpM19t5bYoAvzjxrCfMZUsZUw7ACAuPM95I6YMLsKxp8CiRHaLnzPNcmzmwuUA==", null, false, "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU", false, "Ivan" }
+                    { "c23c3678-6194-4b7e-a928-09614190eb62", 0, "4952d522-a862-4544-83e6-cbeab6f85070", "admin1@admin.com", false, true, null, "ADMIN1@ADMIN.COM", "DIYAN", "AQAAAAEAACcQAAAAENXgIFbhPnTwwMIJqW5USRb7VbDdRlmHsaUYY6JGUCmtVNaVHIkyrzTv1nYv0bZjtg==", null, false, "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN", false, "Diyan" },
+                    { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", 0, "b1a7f4ae-d1e2-41ad-b28a-02a3335b3383", "admin2@admin.com", false, true, null, "ADMIN2@ADMIN.COM", "IVAN", "AQAAAAEAACcQAAAAELZ2Ux6w8hhKBf0I8KoK7UvmbLEYBEqgFMmV4tR+HYZvIxt543/Q7x1UUwWdQvG8og==", null, false, "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU", false, "Ivan" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "CARBRAND",
+                columns: new[] { "Id", "BRANDNAME" },
+                values: new object[,]
+                {
+                    { 1, "Seat" },
+                    { 2, "Renault" }
                 });
 
             migrationBuilder.InsertData(
@@ -285,12 +294,20 @@ namespace AutomotiveMarketSystem.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "UserId", "RoleId" },
-                values: new object[] { "c23c3678-6194-4b7e-a928-09614190eb62", "ca678235-7571-4177-984f-e9d1957b0187" });
+                values: new object[,]
+                {
+                    { "c23c3678-6194-4b7e-a928-09614190eb62", "ca678235-7571-4177-984f-e9d1957b0187" },
+                    { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", "ca678235-7571-4177-984f-e9d1957b0187" }
+                });
 
             migrationBuilder.InsertData(
-                table: "AspNetUserRoles",
-                columns: new[] { "UserId", "RoleId" },
-                values: new object[] { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", "ca678235-7571-4177-984f-e9d1957b0187" });
+                table: "CARMODEL",
+                columns: new[] { "Id", "CARBRANDID", "MODELNAME" },
+                values: new object[,]
+                {
+                    { 1, 1, "Alhambra" },
+                    { 2, 1, "Ibiza" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ADVERTISEMENTS_CARID",
