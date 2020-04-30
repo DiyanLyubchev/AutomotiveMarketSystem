@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,13 +8,17 @@ namespace AutomotiveMarketSystem.Models
 {
     public class CarViewModel
     {
-        public string Make { get; set; }
+        [Required]
+        public string Brand { get; set; }
 
+        [Required]
         public string CarModel { get; set; }
 
+        [Required]
         public int Engine { get; set; }
 
-
+        [Required]
+        [Range(3,5)]
         public int Door { get; set; }
 
         public DateTime ProductionYear { get; set; }

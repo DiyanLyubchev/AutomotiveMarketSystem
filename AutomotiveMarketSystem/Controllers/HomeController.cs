@@ -26,21 +26,7 @@ namespace AutomotiveMarketSystem.Controllers
 
         public IActionResult Privacy()
         {
-            var dto = new CarDto
-            {
-                AdvertisementId = 1,
-                CarModel = "Polo",
-                Door = 3,
-                Engine = 1000,
-                EngineTypeStatusId = 1,
-                Make = "VW",
-                Price = 22.50m,
-                ProductionYear = DateTime.Now,
-            };
-            this.carService.AddCar(dto);
-
             //User.FindFirstValue(ClaimTypes.NameIdentifier)
-
 
             return View();
         }

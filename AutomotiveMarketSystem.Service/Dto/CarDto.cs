@@ -6,7 +6,7 @@ namespace AutomotiveMarketSystem.Service.Dto
 {
     public class CarDto
     {
-        public string Make { get; set; }
+        public string Brand { get; set; }
 
         public string CarModel { get; set; }
 
