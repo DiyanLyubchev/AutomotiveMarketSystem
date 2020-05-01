@@ -8,6 +8,7 @@ using AutomotiveMarketSystem.Service.Contracts;
 using AutomotiveMarketSystem.Service.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AutomotiveMarketSystem.Controllers
 {
@@ -29,9 +30,44 @@ namespace AutomotiveMarketSystem.Controllers
 
         [HttpGet]
         [Authorize]
-        public IActionResult AddCar()
+        public async  Task<IActionResult> AddCar()
         {
-            return View();
+            try
+            {
+                var car = await GetOfficeViewModelAsync(new CarDto());
+
+                return View(car);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        private async Task<CarViewModel> GetOfficeViewModelAsync(CarDto carDto)
+        {
+
+            var models = await this.carService.GetAllModelAsync();
+            var allmodells = this.mapper.Map<List<CarBrandViewModel>>(models);
+
+            var carBrand = await this.carService.GetModelByBrandIdAsync(carDto.CarModelId);
+            var carBrandView = this.mapper.Map<List<CarModelViewModel>>(carBrand);
+
+            var carViewModel = new CarViewModel
+            {
+                Id = carDto.Id,
+                Door = carDto.Door,
+                Engine = carDto.Engine,
+                CarBrandId  = carDto.CarBrandId,
+                CarModelId = carDto.CarModelId,
+                Price = carDto.Price,
+                ProductionYear = carDto.ProductionYear,
+                AllCarModel = allmodells,
+                AllCarBrandByModel = carDto.CarBrandId == 0 ?
+                    Enumerable.Empty<CarModelViewModel>() : carBrandView
+                   
+            };
+
+            return carViewModel;
         }
 
         [HttpPost]

@@ -6,6 +6,7 @@ namespace AutomotiveMarketSystem.Service.Dto
 {
     public class CarDto
     {
+        public int Id { get; set; }
         public string Brand { get; set; }
 
         public string CarModel { get; set; }
@@ -22,5 +23,11 @@ namespace AutomotiveMarketSystem.Service.Dto
         public int EngineTypeStatusId { get; set; }
 
         public int AdvertisementId { get; set; }
+
+
+        public int CarBrandId { get; set; }
+
+ 
+        public int CarModelId { get; set; }
     }
 }

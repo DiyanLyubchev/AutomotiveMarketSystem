@@ -1,4 +1,5 @@
 ﻿using AutomotiveMarketSystem.Service.Dto;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AutomotiveMarketSystem.Service.Contracts
@@ -6,5 +7,9 @@ namespace AutomotiveMarketSystem.Service.Contracts
     public interface ICarService
     {
         Task<CarDto> AddCar(CarDto car);
+
+        Task<IEnumerable<CarModelDto>> GetModelByBrandIdAsync(int carBrandId);
+
+        Task<IEnumerable<CarBrandDto>> GetAllModelAsync();
     }
 }

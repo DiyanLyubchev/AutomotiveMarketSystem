@@ -7,17 +7,22 @@
 ProductionYear
 <div class="row">
     <div class="col-md-4">
+        <input asp-for="Id" hidden />
         <form asp-action="AddCar" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Brand" class="control-label"></label>
-                <input asp-for="Brand" class="form-control" />
-                <span asp-validation-for="Brand" class="text-danger"></span>
+            <div class="select">
+                <select required asp-for="CarModelId"
+                        asp-items="@(new SelectList(Model.AllCarModel,"Id","BrandName"))"
+                          onchange="populateBrand(event.srcElement.value, 'CarBrandId')">
+                    <option value="">Select Brand</option>
+                </select>
             </div>
-            <div class="form-group">
-                <label asp-for="CarModel" class="control-label"></label>
-                <input asp-for="CarModel" class="form-control" />
-                <span asp-validation-for="CarModel" class="text-danger"></span>
+            <br />
+            <div class="select">
+                <select required asp-for="CarBrandId"
+                        asp-items="@(new SelectList(Model.AllCarBrandByModel,"Id","ModelName"))">
+                    <option value="">Select Model</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Engine" class="control-label"></label>
@@ -41,6 +46,7 @@ ProductionYear
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <button type="submit" class="btn alert-primary">Create</button>
             </div>

@@ -5,6 +5,7 @@ using AutomotiveMarketSystem.Service.Contracts;
 using AutomotiveMarketSystem.Service.Dto;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -35,11 +36,36 @@ namespace AutomotiveMarketSystem.Service
 
             var carId = await GetNextValue();
             newCar.Id = carId;
-           
+
             await this.context.Cars.AddAsync(newCar);
             await this.context.SaveChangesAsync();
 
             return this.mapper.Map<CarDto>(newCar);
+        }
+        public async Task<IEnumerable<CarModelDto>> GetModelByBrandIdAsync(int carBrandId)
+        {
+          var allModels = await this.context.CarModels
+                .Include(brand => brand.CarBrand)
+                .Where(model => model.CarBrandId == carBrandId)
+                .Select(model => new CarModelDto
+                {
+                    Id = model.Id,
+                    ModelName = model.ModelName,
+                    CarBrandId = model.CarBrandId,
+                }).ToListAsync();
+
+            var stop = 0;
+
+            return allModels;
+        }
+
+        public async Task<IEnumerable<CarBrandDto>> GetAllModelAsync()
+        {
+            return await this.context.CarBrands.Select(model => new CarBrandDto
+            {
+                Id = model.Id,
+                BrandName = model.BrandName
+            }).ToListAsync();
         }
 
         public async Task<int> GetNextValue()
@@ -56,5 +82,8 @@ namespace AutomotiveMarketSystem.Service
                 }
             }
         }
+
+
     }
 }
+
