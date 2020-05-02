@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutomotiveMarketSystem.Service.Contracts;
 using AutomotiveMarketSystem.Service.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AutomotiveMarketSystem.Controllers
@@ -26,6 +27,13 @@ namespace AutomotiveMarketSystem.Controllers
         {
             var allAds = await this.advertisementService.GetAds();
             return View(allAds);
+        }
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> CreateAdvertisement(int newCarId)
+        {
+            var allAds = await this.advertisementService.GetAds();
+            return View();
         }
     }
 }

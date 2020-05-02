@@ -7,16 +7,10 @@ namespace AutomotiveMarketSystem.Service.Dto
     public class CarDto
     {
         public int Id { get; set; }
-        public string Brand { get; set; }
-
-        public string CarModel { get; set; }
-
-        public int Engine { get; set; }
-
 
         public int Door { get; set; }
 
-        public DateTime ProductionYear { get; set; }
+        public DateTime ProductionYear { get; set; } =  DateTime.Now;
 
         public decimal Price { get; set; }
 

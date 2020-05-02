@@ -39,16 +39,12 @@ namespace AutomotiveMarketSystem.Data
 
                 entity.HasKey(key => key.Id);
 
-                //entity.Property(carMake => carMake.C)
-                //    .HasColumnName("MAKE")
-                //    .HasColumnType("VARCHAR2(50)");
-
                 entity.Property(brand => brand.CarBrandId)
                     .HasColumnName("CARBRANDID")
                     .HasColumnType("NUMBER(10)");
 
-                entity.Property(engine => engine.Engine)
-                  .HasColumnName("ENGINE")
+                entity.Property(engine => engine.EngineTypeStatusId)
+                  .HasColumnName("ENGINETYPESTATUSID")
                   .HasColumnType("NUMBER(10)");
 
                 entity.Property(engine => engine.Door)
@@ -63,11 +59,16 @@ namespace AutomotiveMarketSystem.Data
                  .HasColumnName("PRICE")
                  .HasColumnType("NUMBER");
 
-                entity.HasOne(adv => adv.Advertisement).WithOne(car => car.Car);
-                entity.HasOne(brand => brand.CarBrand).WithMany(x => x.Cars);
+                entity.HasOne(adv => adv.Advertisement)
+                .WithOne(car => car.Car);
+
+                entity.HasOne(brand => brand.CarBrand)
+                .WithMany(x => x.Cars)
+                .HasForeignKey(keybr => keybr.CarBrandId);
 
 
-                entity.HasOne(engineType => engineType.EngineType).WithOne(car => car.Car);
+                entity.HasOne(engineType => engineType.EngineType)
+                .WithOne(car => car.Car);
             });
 
 
@@ -81,7 +82,11 @@ namespace AutomotiveMarketSystem.Data
                  .HasColumnName("CARID")
                  .HasColumnType("NUMBER(10)");
 
-                entity.HasOne(user => user.User).WithMany(adv => adv.Advertisements);
+                entity.HasOne(user => user.User)
+                .WithMany(adv => adv.Advertisements);
+
+                entity.HasOne(car => car.Car)
+                .WithOne(adv => adv.Advertisement);
             });
 
             builder.Entity<EngineTypeStatus>(entity =>
@@ -107,10 +112,6 @@ namespace AutomotiveMarketSystem.Data
                  .HasColumnName("BRANDNAME")
                  .HasColumnType("VARCHAR2(50)");
 
-                //entity.Property(model => model.BrandModels)
-                // .HasColumnName("BRANDMODEL")
-                // .HasColumnType("VARCHAR2(200)");
-
                 entity.HasMany(brandModels => brandModels.BrandModels)
                 .WithOne(brand => brand.CarBrand);
 
@@ -133,23 +134,10 @@ namespace AutomotiveMarketSystem.Data
                 .HasColumnType("NUMBER(10)");
 
                 entity.HasOne(brand => brand.CarBrand)
-                .WithMany(brand => brand.BrandModels);
+                .WithMany(brand => brand.BrandModels)
+                .HasForeignKey(foregnKeybran => foregnKeybran.CarBrandId);
+
             });
-
-            //builder.Entity<UserRole>(entity =>
-            //{
-            //    entity.ToTable("ASPNETROLES");
-
-            //    entity.HasKey(key => key.Id);
-
-            //    entity.Property(etype => etype.Name)
-            //        .HasColumnName("NAME")
-            //        .HasColumnType("NVARCHAR2(256)");
-
-            //    entity.Property(etype => etype.NormalizedName)
-            //       .HasColumnName("NORMALIZEDNAME")
-            //       .HasColumnType("NVARCHAR2(256)");
-            //});
 
             builder.SeedUserRoles();
             builder.SeedEngine();

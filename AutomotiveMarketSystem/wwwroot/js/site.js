@@ -9,3 +9,13 @@
             select.html(options);
         });
 };
+
+$("#advetisement").click(function () {
+    const carId = $("#advetisement").val();
+
+    $.ajax({
+        url: '/Advertisement/CreateAdvertisement',
+        data: { newCarId: carId },
+        type: 'Post',
+    });
+});

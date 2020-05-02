@@ -11,7 +11,6 @@ namespace AutomotiveMarketSystem.AutoMapperProfiles
 {
     public class CarBrandProfile : Profile
     {
-      
         public CarBrandProfile()
         {
             CreateMap<CarBrand, CarBrandDto>().ReverseMap();

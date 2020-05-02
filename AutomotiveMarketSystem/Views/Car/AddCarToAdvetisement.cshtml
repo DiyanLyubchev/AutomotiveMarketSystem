@@ -1,0 +1,22 @@
+﻿@model CarViewModel
+
+@{
+    ViewData["Title"] = "AddCarToAdvetisement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using AutomotiveMarketSystem.Data.Common;
+<h1>AddCarToAdvetisement</h1>
+<div class="row">
+    <div class="col-8">
+        <span>Car:</span> <span>@Model.CarBrandId</span>
+        <br />
+        <span>Price:</span> <span>@Model.Price BGN</span>
+        <br />
+        <span>Year:</span> <span>@Model.ProductionYear</span>
+        <br />
+        <span>Engine:</span> <span>@((CarFuel)Model.EngineTypeStatusId)</span>
+        <br />
+        <button id="advetisement" value="@Model.Id" type="button" class="btn alert-primary">Create Advetisement</button>
+    </div>
+</div>
+

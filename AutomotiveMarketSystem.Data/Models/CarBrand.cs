@@ -8,9 +8,9 @@ namespace AutomotiveMarketSystem.Data.Models
     public class CarBrand : BaseEntity
     {
         public string BrandName { get; set; }
-        public IEnumerable<CarModel> BrandModels { get; set;}
-        public IEnumerable<Car> Cars { get; set; }
-       
 
+        public virtual ICollection<CarModel> BrandModels { get; set;}
+
+        public virtual ICollection<Car> Cars { get; set; }
     }
 }

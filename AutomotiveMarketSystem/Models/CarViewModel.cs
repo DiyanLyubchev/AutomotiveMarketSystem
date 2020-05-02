@@ -12,26 +12,16 @@ namespace AutomotiveMarketSystem.Models
         public int Id { get; set; }
 
         [Required]
-        public string Brand { get; set; }
-
-        [Required]
-        public string CarModel { get; set; }
-
-        [Required]
-        public int Engine { get; set; }
-
-        [Required]
         [Range(3,5)]
         public int Door { get; set; }
 
-        public DateTime ProductionYear { get; set; }
+        public DateTime ProductionYear { get; set; } = DateTime.Now;
 
         public decimal Price { get; set; }
 
         public int EngineTypeStatusId { get; set; }
      
         public int CarBrandId { get; set; }
-
 
         public int CarModelId { get; set; }
 

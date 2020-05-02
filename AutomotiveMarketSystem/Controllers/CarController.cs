@@ -8,7 +8,6 @@ using AutomotiveMarketSystem.Service.Contracts;
 using AutomotiveMarketSystem.Service.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AutomotiveMarketSystem.Controllers
 {
@@ -56,7 +55,7 @@ namespace AutomotiveMarketSystem.Controllers
             {
                 Id = carDto.Id,
                 Door = carDto.Door,
-                Engine = carDto.Engine,
+                EngineTypeStatusId = carDto.EngineTypeStatusId,
                 CarBrandId  = carDto.CarBrandId,
                 CarModelId = carDto.CarModelId,
                 Price = carDto.Price,
@@ -82,7 +81,10 @@ namespace AutomotiveMarketSystem.Controllers
             {
                 var newCarfromUi = this.mapper.Map<CarDto>(viewModel);
                 var newCar = await this.carService.AddCar(newCarfromUi);
-                return View(newCar);
+
+                var newCarFromData = this.mapper.Map<CarViewModel>(newCar);
+              
+                return View("AddCarToAdvetisement" ,newCarFromData);
             }
             catch (ArgumentException ex)
             {

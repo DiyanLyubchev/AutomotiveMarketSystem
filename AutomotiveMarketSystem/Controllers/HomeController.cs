@@ -23,13 +23,7 @@ namespace AutomotiveMarketSystem.Controllers
         public IActionResult Index()
         {
             return View();
-        }
-
-        public IActionResult Privacy()
-        {
             //User.FindFirstValue(ClaimTypes.NameIdentifier)
-
-            return View();
         }
 
         [HttpGet]

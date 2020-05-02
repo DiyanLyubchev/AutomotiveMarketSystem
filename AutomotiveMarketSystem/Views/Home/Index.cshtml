@@ -6,13 +6,4 @@
     <h1 class="display-4">Automotive Sales System</h1>
 </div>
 
-<div class="container">
-    <div class="container">
-        @if (User.Identity.IsAuthenticated)
-        {
-            @Html.ActionLink("New Car", "AddCar", "Cars", null, new { @class = "btn btn-primary" })
-        }
 
-        @*@Html.ActionLink("Search", "Search", "Bars", null, new { @class = "btn btn-primary" })*@
-    </div>
-</div>

@@ -4,7 +4,6 @@
 }
 
 <h4>Add a Car</h4>
-ProductionYear
 <div class="row">
     <div class="col-md-4">
         <input asp-for="Id" hidden />
@@ -13,7 +12,7 @@ ProductionYear
             <div class="select">
                 <select required asp-for="CarModelId"
                         asp-items="@(new SelectList(Model.AllCarModel,"Id","BrandName"))"
-                          onchange="populateBrand(event.srcElement.value, 'CarBrandId')">
+                        onchange="populateBrand(event.srcElement.value, 'CarBrandId')">
                     <option value="">Select Brand</option>
                 </select>
             </div>
@@ -24,10 +23,14 @@ ProductionYear
                     <option value="">Select Model</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label asp-for="Engine" class="control-label"></label>
-                <input asp-for="Engine" class="form-control" />
-                <span asp-validation-for="Engine" class="text-danger"></span>
+            <br />
+            <div class="select">
+                <select required asp-for="EngineTypeStatusId">
+                    <option value="1">Gas</option>
+                    <option value="2">Diesel</option>
+                    <option value="3">Electric</option>
+                    <option value="4">Hybrid</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Door" class="control-label"></label>
