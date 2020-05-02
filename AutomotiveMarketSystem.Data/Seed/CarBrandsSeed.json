@@ -1,79 +1,158 @@
 [
   {
     "id": 1,
-    "brandName": "Alfa Romeo"
+    "brandName": "Seat"
   },
   {
     "id": 2,
+    "brandName": "Renault"
+  },
+  {
+    "id": 3,
+    "brandName": "Peugeot"
+  },
+  {
+    "id": 4,
+    "brandName": "Dacia"
+  },
+  {
+    "id": 5,
+    "brandName": "Citroën"
+  },
+  {
+    "id": 6,
+    "brandName": "Opel"
+  },
+  {
+    "id": 7,
+    "brandName": "Alfa Romeo"
+  },
+  {
+    "id": 8,
+    "brandName": "Skoda"
+  },
+  {
+    "id": 9,
+    "brandName": "Chevrolet"
+  },
+  {
+    "id": 10,
+    "brandName": "Porsche"
+  },
+  {
+    "id": 11,
+    "brandName": "Honda"
+  },
+  {
+    "id": 12,
+    "brandName": "Subaru"
+  },
+  {
+    "id": 13,
+    "brandName": "Mazda"
+  },
+  {
+    "id": 14,
+    "brandName": "Mitsubishi"
+  },
+  {
+    "id": 15,
+    "brandName": "Lexus"
+  },
+  {
+    "id": 16,
+    "brandName": "Toyota"
+  },
+  {
+    "id": 17,
+    "brandName": "BMW"
+  },
+  {
+    "id": 18,
+    "brandName": "Volkswagen"
+  },
+  {
+    "id": 19,
+    "brandName": "Suzuki"
+  },
+  {
+    "id": 20,
+    "brandName": "Mercedes-Benz"
+  },
+  {
+    "id": 21,
+    "brandName": "Saab"
+  },
+  {
+    "id": 22,
     "brandName": "Audi"
+  },
+  {
+    "id": 23,
+    "brandName": "Kia"
+  },
+  {
+    "id": 24,
+    "brandName": "Land Rover"
+  },
+  {
+    "id": 25,
+    "brandName": "Dodge"
+  },
+  {
+    "id": 26,
+    "brandName": "Chrysler"
+  },
+  {
+    "id": 27,
+    "brandName": "Ford"
+  },
+  {
+    "id": 28,
+    "brandName": "Hummer"
+  },
+  {
+    "id": 29,
+    "brandName": "Hyundai"
+  },
+  {
+    "id": 30,
+    "brandName": "Infiniti"
+  },
+  {
+    "id": 31,
+    "brandName": "Jaguar"
+  },
+  {
+    "id": 32,
+    "brandName": "Jeep"
+  },
+  {
+    "id": 33,
+    "brandName": "Nissan"
+  },
+  {
+    "id": 34,
+    "brandName": "Volvo"
+  },
+  {
+    "id": 35,
+    "brandName": "Daewoo"
+  },
+  {
+    "id": 36,
+    "brandName": "Fiat"
+  },
+  {
+    "id": 37,
+    "brandName": "MINI"
+  },
+  {
+    "id": 38,
+    "brandName": "Rover"
+  },
+  {
+    "id": 39,
+    "brandName": "Smart"
   }
-//  {
-//    "id": 4
-
-//  },
-//  {
-//    "id": 5
-
-//  },
-//  {
-//    "id": 6
-
-//  },
-//  {
-//    "id": 7
-
-//  },
-//  {
-//    "id": 8
-
-//  },
-//  {
-//    "id": 9
-
-//  },
-//  {
-//    "id": 10
-
-//  },
-//  {
-//    "id": 11
-
-//  },
-//  {
-//    "id": 12
-
-//  },
-//  {
-//    "id": 13
-
-//  },
-//  {
-//    "id": 14
-
-//  },
-//  {
-//    "id": 15
-
-//  },
-//  {
-//    "id": 16
-
-//  },
-//  {
-//    "id": 17
-
-//  },
-//  {
-//    "id": 18
-
-//  },
-//  {
-//    "id": 19
-
-//  },
-//  {
-//    "id": 20
-
-//  }
-
 ]

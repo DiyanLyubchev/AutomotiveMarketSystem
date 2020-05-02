@@ -18,6 +18,8 @@ namespace AutomotiveMarketSystem.Data.Models
 
         public virtual CarBrand CarBrand { get; set; }
 
+        public int CarModelId { get; set; }
+
         [ForeignKey("EngineTypeStatus")]
         public int EngineTypeStatusId { get; set; }
         

@@ -26,7 +26,7 @@ namespace AutomotiveMarketSystem.Service
 
         public async Task<CarDto> AddCar(CarDto car)
         {
-            //var newCar = this.mapper.Map<Car>(car);
+            var newCar = this.mapper.Map<Car>(car);
 
             var brand = await this.context.CarBrands
                 .Include(cars => cars.Cars)
@@ -37,20 +37,22 @@ namespace AutomotiveMarketSystem.Service
            .SingleOrDefaultAsync(carBrand => carBrand.Id == car.EngineTypeStatusId);
 
             var carId = await GetNextValue();
-            //newCar.Id = carId;
-            //newCar.CarBrand = brand;
+            newCar.Id = carId;
+            newCar.CarBrand = brand;
+            newCar.EngineType = engine;
 
-            var newCar = new Car
-            {
-                Id = carId,
-                CarBrand = brand,
-                CarBrandId = car.CarBrandId,
-                Door = car.Door,
-                EngineTypeStatusId = car.EngineTypeStatusId,
-                EngineType = engine,
-                Price = car.Price,
-                ProductionYear = car.ProductionYear
-            };
+            //var newCar = new Car
+            //{
+            //    Id = carId,
+            //    CarBrand = brand,
+            //    CarBrandId = car.CarBrandId,
+            //    CarModelId = car.CarModelId,
+            //    Door = car.Door,
+            //    EngineTypeStatusId = car.EngineTypeStatusId,
+            //    EngineType = engine,
+            //    Price = car.Price,
+            //    ProductionYear = car.ProductionYear
+            //};
 
             await this.context.Cars.AddAsync(newCar);
             await this.context.SaveChangesAsync();

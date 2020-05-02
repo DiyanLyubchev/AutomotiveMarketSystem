@@ -41,6 +41,8 @@ namespace AutomotiveMarketSystem.Service
             var adId = await GetNextValue();
             newAd.Id = adId;
 
+            newAd.PublishDate = DateTime.Now;
+
             await this.context.Advertisements.AddAsync(newAd);
             await this.context.SaveChangesAsync();
 

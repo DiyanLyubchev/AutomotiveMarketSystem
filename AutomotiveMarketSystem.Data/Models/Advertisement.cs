@@ -1,4 +1,5 @@
 ﻿using AutomotiveMarketSystem.Data.Base;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,5 +18,7 @@ namespace AutomotiveMarketSystem.Data.Models
         public int CarId { get; set; }
 
         public virtual Car Car { get; set; }
+
+        public DateTime PublishDate { get; set; }
     }
 }

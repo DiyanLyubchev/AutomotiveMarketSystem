@@ -3,15 +3,17 @@ using System;
 using AutomotiveMarketSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oracle.EntityFrameworkCore.Metadata;
 
 namespace AutomotiveMarketSystem.Data.Migrations
 {
     [DbContext(typeof(AutomotiveMarketSystemContext))]
-    partial class AutomotiveMarketSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20200502093850_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,8 +29,6 @@ namespace AutomotiveMarketSystem.Data.Migrations
                     b.Property<int>("CarId")
                         .HasColumnName("CARID")
                         .HasColumnType("NUMBER(10)");
-
-                    b.Property<DateTime>("PublishDate");
 
                     b.Property<string>("UserId");
 
@@ -50,8 +50,6 @@ namespace AutomotiveMarketSystem.Data.Migrations
                     b.Property<int>("CarBrandId")
                         .HasColumnName("CARBRANDID")
                         .HasColumnType("NUMBER(10)");
-
-                    b.Property<int>("CarModelId");
 
                     b.Property<int>("Door")
                         .HasColumnName("DOOR")
@@ -5520,13 +5518,13 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         {
                             Id = "c23c3678-6194-4b7e-a928-09614190eb62",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f05a8a98-154a-430a-9778-791a5e339791",
+                            ConcurrencyStamp = "4ad11f0d-4d63-4ffc-895c-1fb94ec295fb",
                             Email = "admin1@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN1@ADMIN.COM",
                             NormalizedUserName = "DIYAN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEN6R0tOsGW1AGb06eXNj8hqvMkapVn77lsNDmPFuHOoWtC184a3gSDrSj9INB1qzbQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENGymNN87dKbBYryfGxAx2n67ZG0Gfkpp+ulm3+le94q+7oEEkPqrSFoMtkUBB+owA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN",
                             TwoFactorEnabled = false,
@@ -5536,13 +5534,13 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         {
                             Id = "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "94fea588-b741-4b13-8a18-fc0081b202ab",
+                            ConcurrencyStamp = "a66c0ba3-517f-469f-9c80-2e55f20c9eef",
                             Email = "admin2@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN2@ADMIN.COM",
                             NormalizedUserName = "IVAN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGwsVG/732Ojr3WktB2jAcpJifeU/xKJpkUKsvkzX7JaBatI385TzZZ9k+mQ2HTTQQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENo+KL5ZMkQdZ5QDZxLli9vZ7mWpT/fbgyCMlZUWcfXPIaB1OPxrAMD1fpXZKRhAzw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU",
                             TwoFactorEnabled = false,
@@ -5686,7 +5684,7 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         new
                         {
                             Id = "ca678235-7571-4177-984f-e9d1957b0187",
-                            ConcurrencyStamp = "7b22e9f9-d4e5-4bb6-928e-139376d26ee4",
+                            ConcurrencyStamp = "ce259295-2494-419f-ac68-b9c0d2051936",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
