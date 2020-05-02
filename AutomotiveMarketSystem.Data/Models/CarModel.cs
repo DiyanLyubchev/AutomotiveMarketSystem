@@ -7,7 +7,10 @@ namespace AutomotiveMarketSystem.Data.Models
     public class CarModel : BaseEntity
     {
         public string ModelName { get; set; }
-        public CarBrand CarBrand { get; set; }
+
+        [ForeignKey("CarBrand")]
         public int CarBrandId { get; set; }
+
+        public virtual CarBrand CarBrand { get; set; }
     }
 }

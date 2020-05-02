@@ -1,4 +1,21 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function populateBrand(carBrandId, targetSelectId) {
+    $.getJSON(`/home/getModels?brandId=${carBrandId}`)
+        .then(brands => {
+            const select = $(`#${targetSelectId}`);
+            let options = '<option>Select Model</option>';
+            brands.forEach(model => {
+                options += `<option value="${model.id}">${model.modelName}</option>`;
+            });
+            select.html(options);
+        });
+};
 
-// Write your JavaScript code.
+$("#advetisement").click(function () {
+    const carId = $("#advetisement").val();
+
+    $.ajax({
+        url: '/Advertisement/CreateAdvertisement',
+        data: { newCarId: carId },
+        type: 'Post',
+    });
+});

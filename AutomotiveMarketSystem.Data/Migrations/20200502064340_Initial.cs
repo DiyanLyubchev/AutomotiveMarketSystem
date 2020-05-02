@@ -4,7 +4,7 @@ using Oracle.EntityFrameworkCore.Metadata;
 
 namespace AutomotiveMarketSystem.Data.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -206,13 +206,11 @@ namespace AutomotiveMarketSystem.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Oracle:ValueGenerationStrategy", OracleValueGenerationStrategy.IdentityColumn),
-                    CARBRANDID = table.Column<int>(type: "NUMBER(10)", nullable: false),
-                    ENGINE = table.Column<int>(type: "NUMBER(10)", nullable: false),
                     DOOR = table.Column<int>(type: "NUMBER(10)", nullable: false),
                     PRODUCTIONYEAR = table.Column<DateTime>(type: "DATE", nullable: false),
                     PRICE = table.Column<decimal>(type: "NUMBER", nullable: false),
-                    EngineTypeStatusId = table.Column<int>(nullable: false),
-                    AdvertisementId = table.Column<int>(nullable: false)
+                    CARBRANDID = table.Column<int>(type: "NUMBER(10)", nullable: false),
+                    ENGINETYPESTATUSID = table.Column<int>(type: "NUMBER(10)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -224,8 +222,8 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CAR_ENGINETYPESTATUS_EngineTypeStatusId",
-                        column: x => x.EngineTypeStatusId,
+                        name: "FK_CAR_ENGINETYPESTATUS_ENGINETYPESTATUSID",
+                        column: x => x.ENGINETYPESTATUSID,
                         principalTable: "ENGINETYPESTATUS",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -260,15 +258,15 @@ namespace AutomotiveMarketSystem.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Discriminator", "Name", "NormalizedName" },
-                values: new object[] { "ca678235-7571-4177-984f-e9d1957b0187", "70484d29-0390-4b4f-97a6-d2b3a1fb2db9", "UserRole", "Admin", "ADMIN" });
+                values: new object[] { "ca678235-7571-4177-984f-e9d1957b0187", "6c26e348-4366-4891-9484-8ac79ef5f27c", "UserRole", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "c23c3678-6194-4b7e-a928-09614190eb62", 0, "993ea0f8-5e98-4715-81fb-3d92f8f98258", "admin1@admin.com", false, true, null, "ADMIN1@ADMIN.COM", "DIYAN", "AQAAAAEAACcQAAAAEE03mjua8y6TqBWsQQJ9oRIIqaCjRaXx1uePSFMEEd+3Fu5ha35V2Lsu8PsrO2MhFQ==", null, false, "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN", false, "Diyan" },
-                    { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", 0, "d06cb92e-0fdd-4aad-bc55-be484750136e", "admin2@admin.com", false, true, null, "ADMIN2@ADMIN.COM", "IVAN", "AQAAAAEAACcQAAAAEHEKGf8W5ipTwjj3kzaoOFjzqWtbxmB0nfeJN5phKeyz7FHxH8VGcCWiS+95ZCEnfg==", null, false, "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU", false, "Ivan" }
+                    { "c23c3678-6194-4b7e-a928-09614190eb62", 0, "e0f86205-a802-4c17-99a8-f3a74074562e", "admin1@admin.com", false, true, null, "ADMIN1@ADMIN.COM", "DIYAN", "AQAAAAEAACcQAAAAEDG2iYXgrHmLSQJAtx5WErcISgOh58Njn1uYxONI5m19GWifMEadZ+ilFdDeKAjaaA==", null, false, "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN", false, "Diyan" },
+                    { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", 0, "ad6cd43a-c61a-4070-8902-ea98d8d07f2e", "admin2@admin.com", false, true, null, "ADMIN2@ADMIN.COM", "IVAN", "AQAAAAEAACcQAAAAEDBZ+dKFyCs4SQHlFBqcd/hlWohN+yljfGj3qpf0tIEJUzLAeYj/atdnrANnBFRaRw==", null, false, "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU", false, "Ivan" }
                 });
 
             migrationBuilder.InsertData(
@@ -376,9 +374,9 @@ namespace AutomotiveMarketSystem.Data.Migrations
                 column: "CARBRANDID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CAR_EngineTypeStatusId",
+                name: "IX_CAR_ENGINETYPESTATUSID",
                 table: "CAR",
-                column: "EngineTypeStatusId",
+                column: "ENGINETYPESTATUSID",
                 unique: true);
 
             migrationBuilder.CreateIndex(

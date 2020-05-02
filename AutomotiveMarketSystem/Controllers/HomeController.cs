@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using AutomotiveMarketSystem.Models;
 using AutomotiveMarketSystem.Service.Contracts;
 using AutomotiveMarketSystem.Service.Dto;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AutomotiveMarketSystem.Controllers
 {
@@ -22,13 +23,16 @@ namespace AutomotiveMarketSystem.Controllers
         public IActionResult Index()
         {
             return View();
+            //User.FindFirstValue(ClaimTypes.NameIdentifier)
         }
 
-        public IActionResult Privacy()
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetModels(int brandId)
         {
-            //User.FindFirstValue(ClaimTypes.NameIdentifier)
+            var brand = await this.carService.GetModelByBrandIdAsync(brandId);
 
-            return View();
+            return new JsonResult(brand);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
