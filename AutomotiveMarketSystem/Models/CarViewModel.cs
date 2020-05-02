@@ -14,6 +14,7 @@ namespace AutomotiveMarketSystem.Models
         [Required]
         [Range(3, 5)]
         public int Door { get; set; }
+        public IEnumerable<string> Doors { get; set; } = new string[] { "2/3", "4/5" };
 
         public DateTime ProductionYear { get; set; } = DateTime.Now;
 

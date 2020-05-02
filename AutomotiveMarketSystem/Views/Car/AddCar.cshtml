@@ -32,10 +32,11 @@
                     <option value="4">Hybrid</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label asp-for="Door" class="control-label"></label>
-                <input asp-for="Door" class="form-control" />
-                <span asp-validation-for="Door" class="text-danger"></span>
+            <br />
+            <div class="select">
+                <select required asp-for="Door" asp-items="@(new SelectList(Model.Doors))">
+                    <option value="">Select Doors</option>
+                </select>
             </div>
 
             <div class="form-group">

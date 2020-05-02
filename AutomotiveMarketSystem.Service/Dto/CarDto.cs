@@ -9,6 +9,7 @@ namespace AutomotiveMarketSystem.Service.Dto
         public int Id { get; set; }
 
         public int Door { get; set; }
+        public IEnumerable<int> Doors {get;set;}
 
         public DateTime ProductionYear { get; set; } =  DateTime.Now;
 
