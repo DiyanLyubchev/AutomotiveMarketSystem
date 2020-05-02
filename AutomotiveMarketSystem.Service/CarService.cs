@@ -84,7 +84,7 @@ namespace AutomotiveMarketSystem.Service
             }).ToListAsync();
         }
 
-        public async Task<int> GetNextValue()
+        private async Task<int> GetNextValue()
         {
             using (var command = context.Database.GetDbConnection().CreateCommand())
             {

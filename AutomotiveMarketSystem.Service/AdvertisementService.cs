@@ -40,6 +40,7 @@ namespace AutomotiveMarketSystem.Service
 
             var adId = await GetNextValue();
             newAd.Id = adId;
+            newAd.UserId = dto.UserId;
 
             newAd.PublishDate = DateTime.Now;
 
@@ -49,7 +50,7 @@ namespace AutomotiveMarketSystem.Service
             return this.mapper.Map<AdvertisementDto>(newAd);
         }
 
-        public async Task<int> GetNextValue()
+        private async Task<int> GetNextValue()
         {
             using (var command = context.Database.GetDbConnection().CreateCommand())
             {

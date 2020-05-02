@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutomotiveMarketSystem.Service.Contracts;
 using AutomotiveMarketSystem.Service.Dto;
@@ -23,17 +24,19 @@ namespace AutomotiveMarketSystem.Controllers
             return View();
         }
 
-        public async Task<IActionResult> GetAllAds()
-        {
-            var allAds = await this.advertisementService.GetAds();
-            return View(allAds);
-        }
+       
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> CreateAdvertisement(int newCarId)
         {
-            var allAds = await this.advertisementService.GetAds();
-            return View();
+            if (newCarId <= 0)
+            {
+                throw new ArgumentException("Id is not valid!");
+            }
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var dto = new AdvertisementDto { CarId = newCarId, UserId = userId };
+            var allAds = await this.advertisementService.AddAdvertisement(dto);
+            return RedirectToAction("Index", "Home" );
         }
     }
 }
