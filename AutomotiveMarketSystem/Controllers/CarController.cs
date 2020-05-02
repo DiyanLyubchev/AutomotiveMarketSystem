@@ -83,7 +83,8 @@ namespace AutomotiveMarketSystem.Controllers
                 var newCar = await this.carService.AddCar(newCarfromUi);
 
                 var newCarFromData = this.mapper.Map<CarViewModel>(newCar);
-              
+                newCarFromData.BrandName = await this.carService.GetBrandNameById(newCar.CarBrandId);
+                newCarFromData.ModelName = await this.carService.GetModelNameById(newCar.CarModelId);
                 return View("AddCarToAdvetisement" ,newCarFromData);
             }
             catch (ArgumentException ex)

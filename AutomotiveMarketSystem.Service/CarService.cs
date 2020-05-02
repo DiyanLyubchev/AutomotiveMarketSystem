@@ -6,6 +6,7 @@ using AutomotiveMarketSystem.Service.Dto;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,7 +27,7 @@ namespace AutomotiveMarketSystem.Service
 
         public async Task<CarDto> AddCar(CarDto car)
         {
-            var newCar = this.mapper.Map<Car>(car);
+            //var newCar = this.mapper.Map<Car>(car);
 
             var brand = await this.context.CarBrands
                 .Include(cars => cars.Cars)
@@ -37,22 +38,22 @@ namespace AutomotiveMarketSystem.Service
            .SingleOrDefaultAsync(carBrand => carBrand.Id == car.EngineTypeStatusId);
 
             var carId = await GetNextValue();
-            newCar.Id = carId;
-            newCar.CarBrand = brand;
-            newCar.EngineType = engine;
+            //newCar.Id = carId;
+            //newCar.CarBrand = brand;
+            //newCar.EngineType = engine;
 
-            //var newCar = new Car
-            //{
-            //    Id = carId,
-            //    CarBrand = brand,
-            //    CarBrandId = car.CarBrandId,
-            //    CarModelId = car.CarModelId,
-            //    Door = car.Door,
-            //    EngineTypeStatusId = car.EngineTypeStatusId,
-            //    EngineType = engine,
-            //    Price = car.Price,
-            //    ProductionYear = car.ProductionYear
-            //};
+            var newCar = new Car
+            {
+                Id = carId,
+                CarBrand = brand,
+                CarBrandId = car.CarModelId,
+                CarModelId = car.CarBrandId,
+                Door = car.Door,
+                EngineTypeStatusId = car.EngineTypeStatusId,
+                EngineType = engine,
+                Price = car.Price,
+                ProductionYear = car.ProductionYear
+            };
 
             await this.context.Cars.AddAsync(newCar);
             await this.context.SaveChangesAsync();
@@ -98,6 +99,25 @@ namespace AutomotiveMarketSystem.Service
             }
         }
 
+        public async Task<string> GetBrandNameById(int id)
+        {
+            var brand = await this.context.CarBrands.SingleOrDefaultAsync(brandId => brandId.Id == id);
+            if (brand == null)
+            {
+                throw new ArgumentNullException("There is no such brand id!");
+            }
+            return brand.BrandName;
+        }
+
+        public async Task<string> GetModelNameById(int id)
+        {
+            var model = await this.context.CarModels.SingleOrDefaultAsync(modelId => modelId.Id == id);
+            if (model == null)
+            {
+                throw new ArgumentNullException("There is no such brand id!");
+            }
+            return model.ModelName;
+        }
     }
 }
 
