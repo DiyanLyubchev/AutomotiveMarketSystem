@@ -18,6 +18,7 @@ namespace AutomotiveMarketSystem.Controllers
             this.advertisementService = advertisementService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             //var allAds = await this.advertisementService.GetAds();
@@ -25,6 +26,8 @@ namespace AutomotiveMarketSystem.Controllers
 
             return View();
         }
+
+    
 
         [HttpGet]
         [Authorize]

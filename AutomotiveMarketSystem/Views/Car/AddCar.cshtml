@@ -8,7 +8,7 @@
     <div class="col-md-4">
         <input asp-for="Id" hidden />
         <form asp-action="AddCar" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
             <div class="select">
                 <select required asp-for="CarModelId"
                         asp-items="@(new SelectList(Model.AllCarModel,"Id","BrandName"))"
@@ -26,6 +26,7 @@
             <br />
             <div class="select">
                 <select required asp-for="EngineTypeStatusId">
+                    <option value="">Select Engine Type</option>
                     <option value="1">Gas</option>
                     <option value="2">Diesel</option>
                     <option value="3">Electric</option>
@@ -34,8 +35,12 @@
             </div>
             <br />
             <div class="select">
-                <select required asp-for="Door" asp-items="@(new SelectList(Model.Doors))">
+                <select required asp-for="Door">
                     <option value="">Select Doors</option>
+                    <option value="2">Two Doors</option>
+                    <option value="3">Three Doors</option>
+                    <option value="4">Four Doors</option>
+                    <option value="5">Five Doors</option>
                 </select>
             </div>
 

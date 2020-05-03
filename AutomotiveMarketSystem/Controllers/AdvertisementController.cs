@@ -24,7 +24,7 @@ namespace AutomotiveMarketSystem.Controllers
             return View();
         }
 
-       
+
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> CreateAdvertisement(int newCarId)
@@ -35,8 +35,9 @@ namespace AutomotiveMarketSystem.Controllers
             }
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var dto = new AdvertisementDto { CarId = newCarId, UserId = userId };
-            var allAds = await this.advertisementService.AddAdvertisement(dto);
-            return RedirectToAction("Index", "Home" );
+            await this.advertisementService.AddAdvertisement(dto);
+
+            return new JsonResult(newCarId);
         }
     }
 }

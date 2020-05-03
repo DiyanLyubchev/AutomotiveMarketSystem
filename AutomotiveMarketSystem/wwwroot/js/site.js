@@ -17,5 +17,9 @@ $("#advetisement").click(function () {
         url: '/Advertisement/CreateAdvertisement',
         data: { newCarId: carId },
         type: 'Post',
+        dataType: 'json',
+        success: function () {
+            window.location.href = "/home/index";
+        }
     });
 });
