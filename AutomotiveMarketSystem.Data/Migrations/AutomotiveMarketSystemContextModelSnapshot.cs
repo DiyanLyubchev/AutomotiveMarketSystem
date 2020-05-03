@@ -5520,13 +5520,13 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         {
                             Id = "c23c3678-6194-4b7e-a928-09614190eb62",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f05a8a98-154a-430a-9778-791a5e339791",
+                            ConcurrencyStamp = "b57e86ee-039a-4525-a650-278b0f469ce3",
                             Email = "admin1@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN1@ADMIN.COM",
                             NormalizedUserName = "DIYAN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEN6R0tOsGW1AGb06eXNj8hqvMkapVn77lsNDmPFuHOoWtC184a3gSDrSj9INB1qzbQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC9Pa7EMr9x5oVXuRFR0zVKml6jrrKom52ed6y1qBoYEB1Cp6RnfiJLMSzo2gnK2vg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN",
                             TwoFactorEnabled = false,
@@ -5536,13 +5536,13 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         {
                             Id = "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "94fea588-b741-4b13-8a18-fc0081b202ab",
+                            ConcurrencyStamp = "9565b94e-c298-443c-8fcd-a0af6479fd23",
                             Email = "admin2@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN2@ADMIN.COM",
                             NormalizedUserName = "IVAN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGwsVG/732Ojr3WktB2jAcpJifeU/xKJpkUKsvkzX7JaBatI385TzZZ9k+mQ2HTTQQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELprfrSNSpEMEeDaeDWJ68uT7BNlmnsWssj6H2trq1ns6Ic1clgX1ccAsMQtEGvGMA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU",
                             TwoFactorEnabled = false,
@@ -5686,7 +5686,7 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         new
                         {
                             Id = "ca678235-7571-4177-984f-e9d1957b0187",
-                            ConcurrencyStamp = "7b22e9f9-d4e5-4bb6-928e-139376d26ee4",
+                            ConcurrencyStamp = "348dea58-4bf5-4f63-9168-0e6acbee9695",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

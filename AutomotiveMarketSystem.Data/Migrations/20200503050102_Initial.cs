@@ -4,7 +4,7 @@ using Oracle.EntityFrameworkCore.Metadata;
 
 namespace AutomotiveMarketSystem.Data.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -210,6 +210,7 @@ namespace AutomotiveMarketSystem.Data.Migrations
                     PRODUCTIONYEAR = table.Column<DateTime>(type: "DATE", nullable: false),
                     PRICE = table.Column<decimal>(type: "NUMBER", nullable: false),
                     CARBRANDID = table.Column<int>(type: "NUMBER(10)", nullable: false),
+                    CarModelId = table.Column<int>(nullable: false),
                     ENGINETYPESTATUSID = table.Column<int>(type: "NUMBER(10)", nullable: false)
                 },
                 constraints: table =>
@@ -236,7 +237,8 @@ namespace AutomotiveMarketSystem.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Oracle:ValueGenerationStrategy", OracleValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<string>(nullable: true),
-                    CARID = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    CARID = table.Column<int>(type: "NUMBER(10)", nullable: false),
+                    PublishDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -258,15 +260,15 @@ namespace AutomotiveMarketSystem.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Discriminator", "Name", "NormalizedName" },
-                values: new object[] { "ca678235-7571-4177-984f-e9d1957b0187", "ce259295-2494-419f-ac68-b9c0d2051936", "UserRole", "Admin", "ADMIN" });
+                values: new object[] { "ca678235-7571-4177-984f-e9d1957b0187", "348dea58-4bf5-4f63-9168-0e6acbee9695", "UserRole", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "c23c3678-6194-4b7e-a928-09614190eb62", 0, "4ad11f0d-4d63-4ffc-895c-1fb94ec295fb", "admin1@admin.com", false, true, null, "ADMIN1@ADMIN.COM", "DIYAN", "AQAAAAEAACcQAAAAENGymNN87dKbBYryfGxAx2n67ZG0Gfkpp+ulm3+le94q+7oEEkPqrSFoMtkUBB+owA==", null, false, "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN", false, "Diyan" },
-                    { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", 0, "a66c0ba3-517f-469f-9c80-2e55f20c9eef", "admin2@admin.com", false, true, null, "ADMIN2@ADMIN.COM", "IVAN", "AQAAAAEAACcQAAAAENo+KL5ZMkQdZ5QDZxLli9vZ7mWpT/fbgyCMlZUWcfXPIaB1OPxrAMD1fpXZKRhAzw==", null, false, "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU", false, "Ivan" }
+                    { "c23c3678-6194-4b7e-a928-09614190eb62", 0, "b57e86ee-039a-4525-a650-278b0f469ce3", "admin1@admin.com", false, true, null, "ADMIN1@ADMIN.COM", "DIYAN", "AQAAAAEAACcQAAAAEC9Pa7EMr9x5oVXuRFR0zVKml6jrrKom52ed6y1qBoYEB1Cp6RnfiJLMSzo2gnK2vg==", null, false, "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN", false, "Diyan" },
+                    { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", 0, "9565b94e-c298-443c-8fcd-a0af6479fd23", "admin2@admin.com", false, true, null, "ADMIN2@ADMIN.COM", "IVAN", "AQAAAAEAACcQAAAAELprfrSNSpEMEeDaeDWJ68uT7BNlmnsWssj6H2trq1ns6Ic1clgX1ccAsMQtEGvGMA==", null, false, "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU", false, "Ivan" }
                 });
 
             migrationBuilder.InsertData(

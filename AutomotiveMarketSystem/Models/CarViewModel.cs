@@ -12,14 +12,20 @@ namespace AutomotiveMarketSystem.Models
         public int Id { get; set; }
 
         [Required]
-        [Range(3, 5)]
+        [Range(2, 5)]
         public int Door { get; set; }
-        public IEnumerable<string> Doors { get; set; } = new string[] { "2/3", "4/5" };
 
+
+        [Required]
         public DateTime ProductionYear { get; set; } = DateTime.Now;
 
+
+        [Required]
+        [Range(1,10000000)]
         public decimal Price { get; set; }
 
+        [Required]
+        [Range(1, 4)]
         public int EngineTypeStatusId { get; set; }
 
         public int CarBrandId { get; set; }
@@ -33,6 +39,7 @@ namespace AutomotiveMarketSystem.Models
         public int AdvertisementId { get; set; }
 
         public string BrandName { get; set; }
+         
         public string ModelName { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using AutomotiveMarketSystem.Data.Models;
 using AutomotiveMarketSystem.Service.Contracts;
 using AutomotiveMarketSystem.Service.Dto;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration.UserSecrets;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -38,10 +39,13 @@ namespace AutomotiveMarketSystem.Service
                 throw new ArgumentException($"There is already such ad in the db!");
             }
 
+            //var currentUser = await this.context.Users
+            //    .SingleOrDefaultAsync(userId => userId.Id == dto.UserId);
+
             var adId = await GetNextValue();
             newAd.Id = adId;
             newAd.UserId = dto.UserId;
-
+          //  newAd.User = currentUser;
             newAd.PublishDate = DateTime.Now;
 
             await this.context.Advertisements.AddAsync(newAd);
