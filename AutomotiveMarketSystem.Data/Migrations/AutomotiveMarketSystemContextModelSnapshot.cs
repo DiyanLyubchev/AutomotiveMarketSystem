@@ -57,8 +57,8 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         .HasColumnName("DOOR")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int>("EngineTypeStatusId")
-                        .HasColumnName("ENGINETYPESTATUSID")
+                    b.Property<int>("EngineTypeId")
+                        .HasColumnName("ENGINETYPEID")
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<decimal>("Price")
@@ -73,8 +73,7 @@ namespace AutomotiveMarketSystem.Data.Migrations
 
                     b.HasIndex("CarBrandId");
 
-                    b.HasIndex("EngineTypeStatusId")
-                        .IsUnique();
+                    b.HasIndex("EngineTypeId");
 
                     b.ToTable("CAR");
                 });
@@ -5520,13 +5519,13 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         {
                             Id = "c23c3678-6194-4b7e-a928-09614190eb62",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "51267291-a8aa-442f-aa79-0d29117e2cc6",
+                            ConcurrencyStamp = "454e68f8-e6bf-4796-a7ce-68bd4f44c2f6",
                             Email = "admin1@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN1@ADMIN.COM",
                             NormalizedUserName = "DIYAN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMyXuT2plgBUGsQYbwz4TkbII8ONjh/b4L6UGySCD6JlMx/A5DuZOoKvn3lb7G07Xg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGQNFntLwYeeBudZkET9n/kmW3aKzkh93kYMX0xnbepwEmAihJtexjK2EdAOzr7lpw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN",
                             TwoFactorEnabled = false,
@@ -5536,13 +5535,13 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         {
                             Id = "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1afe2c5d-4019-40ef-b6d1-bdd9648adf16",
+                            ConcurrencyStamp = "fac96f2d-749d-4f07-9509-6df79a5cb013",
                             Email = "admin2@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN2@ADMIN.COM",
                             NormalizedUserName = "IVAN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPdq0Ik5thwQu42ewzVqCLcfIJvM6pO/b94BrYKW1lCl+uTM1PEgUpHrVNRPfdHjiA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKEjGR81UiEBBlw1GG4YABJCzqL4b7yN0Jg5Qu4o2axfB8sPrnJujWTi7MzKzpvxFg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU",
                             TwoFactorEnabled = false,
@@ -5686,7 +5685,7 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         new
                         {
                             Id = "ca678235-7571-4177-984f-e9d1957b0187",
-                            ConcurrencyStamp = "bb453e59-0d38-4654-abb0-dcdc316997ac",
+                            ConcurrencyStamp = "df13e267-5e2f-43b2-bd69-2d7e76be3ae7",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -5712,8 +5711,8 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("AutomotiveMarketSystem.Data.Models.EngineTypeStatus", "EngineType")
-                        .WithOne("Car")
-                        .HasForeignKey("AutomotiveMarketSystem.Data.Models.Car", "EngineTypeStatusId")
+                        .WithMany("Cars")
+                        .HasForeignKey("EngineTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

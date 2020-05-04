@@ -8,17 +8,17 @@
     <div class="col-md-4">
         <input asp-for="Id" hidden />
         <form asp-action="AddCar" enctype="multipart/form-data">
-           
+
             <div class="select">
-                <select required asp-for="CarModelId"
+                <select required asp-for="CarBrandId"
                         asp-items="@(new SelectList(Model.AllCarModel,"Id","BrandName"))"
-                        onchange="populateBrand(event.srcElement.value, 'CarBrandId')">
+                        onchange="populateBrand(event.srcElement.value, 'CarModelId')">
                     <option value="">Select Brand</option>
                 </select>
             </div>
             <br />
             <div class="select">
-                <select required asp-for="CarBrandId"
+                <select required asp-for="CarModelId"
                         asp-items="@(new SelectList(Model.AllCarBrandByModel,"Id","ModelName"))">
                     <option value="">Select Model</option>
                 </select>
@@ -72,6 +72,6 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<strong>
+    <a style="color:dodgerblue" href="javascript:history.go(-1)" title="Go to previous page" >Go back</a>
+</strong>

@@ -43,8 +43,8 @@ namespace AutomotiveMarketSystem.Data
                     .HasColumnName("CARBRANDID")
                     .HasColumnType("NUMBER(10)");
 
-                entity.Property(engine => engine.EngineTypeStatusId)
-                  .HasColumnName("ENGINETYPESTATUSID")
+                entity.Property(engine => engine.EngineTypeId)
+                  .HasColumnName("ENGINETYPEID")
                   .HasColumnType("NUMBER(10)");
 
                 entity.Property(engine => engine.Door)
@@ -68,7 +68,8 @@ namespace AutomotiveMarketSystem.Data
 
 
                 entity.HasOne(engineType => engineType.EngineType)
-                .WithOne(car => car.Car);
+                .WithMany(car => car.Cars)
+                .HasForeignKey(fKey => fKey.EngineTypeId);
             });
 
 
@@ -99,7 +100,7 @@ namespace AutomotiveMarketSystem.Data
                     .HasColumnName("ENGINETYPE")
                     .HasColumnType("VARCHAR2(50)");
 
-                entity.HasOne(car => car.Car).WithOne(type => type.EngineType);
+                entity.HasMany(car => car.Cars).WithOne(type => type.EngineType);
             });
 
             builder.Entity<CarBrand>(entity =>

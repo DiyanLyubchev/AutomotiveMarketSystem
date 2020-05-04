@@ -6,7 +6,6 @@ using AutomotiveMarketSystem.Service.Dto;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,11 +25,11 @@ namespace AutomotiveMarketSystem.Service
         public async Task<CarDto> AddCar(CarDto car)
         {
             var brand = await this.context.CarBrands
-    .Include(cars => cars.Cars)
-    .SingleOrDefaultAsync(carBrand => carBrand.Id == car.CarModelId);
+                   .Include(cars => cars.Cars)
+                   .SingleOrDefaultAsync(carBrand => carBrand.Id == car.CarModelId);
 
             var engine = await this.context.StatusEngines
-           .Include(cars => cars.Car)
+           .Include(cars => cars.Cars)
            .SingleOrDefaultAsync(carBrand => carBrand.Id == car.EngineTypeStatusId);
 
             var carId = await GetNextValue();
@@ -39,10 +38,10 @@ namespace AutomotiveMarketSystem.Service
             {
                 Id = carId,
                 CarBrand = brand,
-                CarBrandId = car.CarModelId,
-                CarModelId = car.CarBrandId,
+                CarBrandId = car.CarBrandId,
+                CarModelId = car.CarModelId,
                 Door = car.Door,
-                EngineTypeStatusId = car.EngineTypeStatusId,
+                EngineTypeId = car.EngineTypeStatusId,
                 EngineType = engine,
                 Price = car.Price,
                 ProductionYear = car.ProductionYear
@@ -53,6 +52,7 @@ namespace AutomotiveMarketSystem.Service
 
             return this.mapper.Map<CarDto>(newCar);
         }
+
         public async Task<IEnumerable<CarModelDto>> GetModelByBrandIdAsync(int carBrandId)
         {
             var allModels = await this.context.CarModels

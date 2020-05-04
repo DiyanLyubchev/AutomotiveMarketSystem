@@ -17,7 +17,7 @@ namespace AutomotiveMarketSystem.Controllers
         private readonly IAdvertisementService advertisementService;
         private readonly IMapper mapper;
 
-        public CarController(ICarService carService, IMapper mapper , IAdvertisementService advertisementService)
+        public CarController(ICarService carService, IMapper mapper, IAdvertisementService advertisementService)
         {
             this.carService = carService;
             this.mapper = mapper;
@@ -31,7 +31,7 @@ namespace AutomotiveMarketSystem.Controllers
 
         [HttpGet]
         [Authorize]
-        public async  Task<IActionResult> AddCar()
+        public async Task<IActionResult> AddCar()
         {
             try
             {
@@ -50,7 +50,7 @@ namespace AutomotiveMarketSystem.Controllers
             var models = await this.carService.GetAllModelAsync();
             var allmodells = this.mapper.Map<List<CarBrandViewModel>>(models);
 
-            var carBrand = await this.carService.GetModelByBrandIdAsync(carDto.CarModelId);
+            var carBrand = await this.carService.GetModelByBrandIdAsync(carDto.CarBrandId);
             var carBrandView = this.mapper.Map<List<CarModelViewModel>>(carBrand);
 
             var carViewModel = new CarViewModel
@@ -58,14 +58,13 @@ namespace AutomotiveMarketSystem.Controllers
                 Id = carDto.Id,
                 Door = carDto.Door,
                 EngineTypeStatusId = carDto.EngineTypeStatusId,
-                CarBrandId  = carDto.CarBrandId,
+                CarBrandId = carDto.CarBrandId,
                 CarModelId = carDto.CarModelId,
                 Price = carDto.Price,
                 ProductionYear = carDto.ProductionYear,
                 AllCarModel = allmodells,
                 AllCarBrandByModel = carDto.CarBrandId == 0 ?
                     Enumerable.Empty<CarModelViewModel>() : carBrandView
-                   
             };
 
             return carViewModel;
@@ -107,6 +106,24 @@ namespace AutomotiveMarketSystem.Controllers
                 var carVm = await GetCarViewModel(currentCar);
 
                 return View("AddCar", carVm);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Update(CarViewModel vm)
+        {
+            try
+            {
+                var currentCar = this.mapper.Map<CarDto>(vm);
+
+                //   await this.carService.UpdateCar(currentCar);
+
+                return RedirectToAction("Index");
             }
             catch (ArgumentException ex)
             {

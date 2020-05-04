@@ -1,4 +1,5 @@
 ﻿using AutomotiveMarketSystem.Data.Base;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AutomotiveMarketSystem.Data.Models
@@ -8,6 +9,6 @@ namespace AutomotiveMarketSystem.Data.Models
     {
         public string EngineType { get; set; }
 
-        public virtual Car Car { get; set; }
+        public virtual ICollection<Car> Cars { get; set; }
     }
 }

@@ -19,12 +19,6 @@ namespace AutomotiveMarketSystem.Controllers
             this.advertisementService = advertisementService;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> CreateAdvertisement(int id)
