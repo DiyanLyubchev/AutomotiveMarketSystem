@@ -4,9 +4,7 @@ using AutomotiveMarketSystem.Data.Models;
 using AutomotiveMarketSystem.Service.Contracts;
 using AutomotiveMarketSystem.Service.Dto;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration.UserSecrets;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -73,13 +71,10 @@ namespace AutomotiveMarketSystem.Service
                 throw new ArgumentException($"There is already such ad in the db!");
             }
 
-            //var currentUser = await this.context.Users
-            //    .SingleOrDefaultAsync(userId => userId.Id == dto.UserId);
-
             var adId = await GetNextValue();
             newAd.Id = adId;
             newAd.UserId = dto.UserId;
-            //  newAd.User = currentUser;
+         
             newAd.PublishDate = DateTime.Now;
 
             await this.context.Advertisements.AddAsync(newAd);
@@ -101,6 +96,21 @@ namespace AutomotiveMarketSystem.Service
                     return reader.GetInt32(0);
                 }
             }
+        }
+
+        public async Task<int> GetAdById(int id)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentException("Id cannot be zero or less then zero");
+            }
+
+            var currentCarId = await this.context.Advertisements
+                .Where(advId => advId.Id == id)
+                .Select(carId => carId.CarId)
+                .SingleOrDefaultAsync();
+
+            return currentCarId;
         }
     }
 }

@@ -11,7 +11,11 @@ namespace AutomotiveMarketSystem.Service.Contracts
         Task<IEnumerable<CarModelDto>> GetModelByBrandIdAsync(int carBrandId);
 
         Task<IEnumerable<CarBrandDto>> GetAllModelAsync();
+
         Task<string> GetBrandNameById(int id);
+
         Task<string> GetModelNameById(int id);
+
+        Task<CarDto> GetCarBy(int carId);
     }
 }

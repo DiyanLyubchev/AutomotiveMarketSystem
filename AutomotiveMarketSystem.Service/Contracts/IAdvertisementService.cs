@@ -8,5 +8,7 @@ namespace AutomotiveMarketSystem.Service.Contracts
     {
         Task<AdvertisementDto> AddAdvertisement(AdvertisementDto dto);
         Task<IEnumerable<AdvertisementViewModelDto>> ShowAllAdvertisement();
+         Task<int> GetAdById(int id);
+
     }
 }

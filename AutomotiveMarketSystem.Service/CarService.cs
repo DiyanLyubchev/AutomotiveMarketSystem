@@ -111,6 +111,14 @@ namespace AutomotiveMarketSystem.Service
             }
             return model.ModelName;
         }
+
+        public async Task<CarDto> GetCarBy(int carId)
+        {
+            var currentCar = await this.context.Cars
+                .SingleOrDefaultAsync(id => id.Id == carId);
+
+            return this.mapper.Map<CarDto>(currentCar);
+        }
     }
 }
 

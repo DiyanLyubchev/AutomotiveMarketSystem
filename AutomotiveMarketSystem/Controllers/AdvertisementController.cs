@@ -25,19 +25,19 @@ namespace AutomotiveMarketSystem.Controllers
         }
 
 
-        [HttpPost]
+        [HttpGet]
         [Authorize]
-        public async Task<IActionResult> CreateAdvertisement(int newCarId)
+        public async Task<IActionResult> CreateAdvertisement(int id)
         {
-            if (newCarId <= 0)
+            if (id <= 0)
             {
                 throw new ArgumentException("Id is not valid!");
             }
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var dto = new AdvertisementDto { CarId = newCarId, UserId = userId };
+            var dto = new AdvertisementDto { CarId = id, UserId = userId };
             await this.advertisementService.AddAdvertisement(dto);
 
-            return new JsonResult(newCarId);
+            return RedirectToAction("Index" , "Home");
         }
     }
 }

@@ -14,12 +14,14 @@ namespace AutomotiveMarketSystem.Controllers
     public class CarController : Controller
     {
         private readonly ICarService carService;
+        private readonly IAdvertisementService advertisementService;
         private readonly IMapper mapper;
 
-        public CarController(ICarService carService, IMapper mapper)
+        public CarController(ICarService carService, IMapper mapper , IAdvertisementService advertisementService)
         {
             this.carService = carService;
             this.mapper = mapper;
+            this.advertisementService = advertisementService;
         }
 
         public IActionResult Index()
@@ -70,6 +72,7 @@ namespace AutomotiveMarketSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddCar(CarViewModel viewModel)
         {
             if (!ModelState.IsValid)
@@ -86,6 +89,24 @@ namespace AutomotiveMarketSystem.Controllers
                 newCarFromData.BrandName = await this.carService.GetBrandNameById(newCar.CarBrandId);
                 newCarFromData.ModelName = await this.carService.GetModelNameById(newCar.CarModelId);
                 return View("AddCarToAdvetisement", newCarFromData);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Update(int id)
+        {
+            try
+            {
+                var carId = await this.advertisementService.GetAdById(id);
+                var currentCar = await this.carService.GetCarBy(carId);
+                var carVm = await GetCarViewModel(currentCar);
+
+                return View("AddCar", carVm);
             }
             catch (ArgumentException ex)
             {

@@ -24,16 +24,26 @@
         <tbody>
             @foreach (var ad in Model)
             {
-                <tr>
-                    <td>@ad.BrandName</td>
-                    <td>@ad.ModelName</td>
-                    <td>@ad.ProductionYear</td>
-                    <td>@ad.Door</td>
-                    <td>@(((CarFuel)ad.EngineTypeId).ToString())</td>
-                    <td>@ad.Price</td>
-                    <td>@ad.PublishDate</td>
-                    <td>@ad.UserName</td>
-                </tr>
+            <tr>
+                <td>@ad.BrandName</td>
+                <td>@ad.ModelName</td>
+                <td>@ad.ProductionYear</td>
+                <td>@ad.Door</td>
+                <td>@(((CarFuel)ad.EngineTypeId).ToString())</td>
+                <td>@ad.Price</td>
+                <td>@ad.PublishDate</td>
+                <td>@ad.UserName</td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td>
+
+                        <button class="btn alert-primary" onclick="window.location.href='@Url.Action("Update", "Car", ad)'">
+                            Update
+                        </button>
+                    </td>
+                }
+
+            </tr>
             }
         </tbody>
     </table>
