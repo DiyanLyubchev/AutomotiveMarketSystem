@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace AutomotiveMarketSystem.Models
+namespace AutomotiveMarketSystem.Service.Dto
 {
-    public class AdvertisementViewModel
+    public class AdvertisementViewModelDto
     {
         public int Id { get; set; }
 
@@ -21,6 +23,6 @@ namespace AutomotiveMarketSystem.Models
         public string UserName { get; set; }
 
         public DateTime PublishDate { get; set; }
-       
+
     }
 }

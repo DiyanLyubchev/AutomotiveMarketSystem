@@ -33,7 +33,7 @@ namespace AutomotiveMarketSystem.Controllers
         {
             try
             {
-                var car = await GetOfficeViewModelAsync(new CarDto());
+                var car = await GetCarViewModel(new CarDto());
 
                 return View(car);
             }
@@ -42,7 +42,7 @@ namespace AutomotiveMarketSystem.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        private async Task<CarViewModel> GetOfficeViewModelAsync(CarDto carDto)
+        private async Task<CarViewModel> GetCarViewModel(CarDto carDto)
         {
 
             var models = await this.carService.GetAllModelAsync();
@@ -85,7 +85,7 @@ namespace AutomotiveMarketSystem.Controllers
                 var newCarFromData = this.mapper.Map<CarViewModel>(newCar);
                 newCarFromData.BrandName = await this.carService.GetBrandNameById(newCar.CarBrandId);
                 newCarFromData.ModelName = await this.carService.GetModelNameById(newCar.CarModelId);
-                return View("AddCarToAdvetisement" ,newCarFromData);
+                return View("AddCarToAdvetisement", newCarFromData);
             }
             catch (ArgumentException ex)
             {

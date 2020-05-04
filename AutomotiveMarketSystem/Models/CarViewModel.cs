@@ -1,9 +1,6 @@
-﻿using AutomotiveMarketSystem.Service.Dto;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AutomotiveMarketSystem.Models
 {
@@ -21,7 +18,7 @@ namespace AutomotiveMarketSystem.Models
 
 
         [Required]
-        [Range(1,10000000)]
+        [Range(1, 10000000)]
         public decimal Price { get; set; }
 
         [Required]
@@ -39,7 +36,7 @@ namespace AutomotiveMarketSystem.Models
         public int AdvertisementId { get; set; }
 
         public string BrandName { get; set; }
-         
+
         public string ModelName { get; set; }
     }
 }

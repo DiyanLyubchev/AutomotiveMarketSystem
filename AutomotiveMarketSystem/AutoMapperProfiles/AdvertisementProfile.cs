@@ -10,7 +10,8 @@ namespace AutomotiveMarketSystem.AutoMapperProfiles
         public AdvertisementProfile()
         {
             CreateMap<Advertisement, AdvertisementDto>().ReverseMap();
-            CreateMap<AdvertisementViewModel, AdvertisementDto>().ReverseMap();
+           // CreateMap<AdvertisementViewModel, AdvertisementDto>().ReverseMap();
+            CreateMap<AdvertisementViewModel, AdvertisementViewModelDto>().ReverseMap();
         }
     }
 }

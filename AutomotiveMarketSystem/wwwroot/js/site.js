@@ -18,8 +18,9 @@ $("#advetisement").click(function () {
         data: { newCarId: carId },
         type: 'Post',
         dataType: 'json',
-        success: function () {
+        success: function TestFnc() {
             window.location.href = "/home/index";
         }
     });
 });
+

@@ -15,32 +15,25 @@ namespace AutomotiveMarketSystem.Service
     public class CarService : ICarService
     {
         private readonly AutomotiveMarketSystemContext context;
-        private readonly IAdvertisementService advertisementService;
         private readonly IMapper mapper;
 
-        public CarService(AutomotiveMarketSystemContext context, IMapper mapper, IAdvertisementService advertisementService)
+        public CarService(AutomotiveMarketSystemContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
-            this.advertisementService = advertisementService;
         }
 
         public async Task<CarDto> AddCar(CarDto car)
         {
-            //var newCar = this.mapper.Map<Car>(car);
-
             var brand = await this.context.CarBrands
-                .Include(cars => cars.Cars)
-                .SingleOrDefaultAsync(carBrand => carBrand.Id == car.CarModelId);
+    .Include(cars => cars.Cars)
+    .SingleOrDefaultAsync(carBrand => carBrand.Id == car.CarModelId);
 
             var engine = await this.context.StatusEngines
            .Include(cars => cars.Car)
            .SingleOrDefaultAsync(carBrand => carBrand.Id == car.EngineTypeStatusId);
 
             var carId = await GetNextValue();
-            //newCar.Id = carId;
-            //newCar.CarBrand = brand;
-            //newCar.EngineType = engine;
 
             var newCar = new Car
             {

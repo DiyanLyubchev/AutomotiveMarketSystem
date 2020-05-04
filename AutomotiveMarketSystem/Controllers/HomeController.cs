@@ -1,7 +1,9 @@
-﻿using AutomotiveMarketSystem.Models;
+﻿using AutoMapper;
+using AutomotiveMarketSystem.Models;
 using AutomotiveMarketSystem.Service.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -11,20 +13,21 @@ namespace AutomotiveMarketSystem.Controllers
     {
         private readonly ICarService carService;
         private readonly IAdvertisementService advertisementService;
+        private readonly IMapper mapper;
 
-        public HomeController(ICarService carService, IAdvertisementService advertisementService)
+        public HomeController(ICarService carService, IAdvertisementService advertisementService, IMapper mapper)
         {
             this.carService = carService;
             this.advertisementService = advertisementService;
+            this.mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            //var allAds = await this.advertisementService.GetAds();
-            //return View(allAds);
-
-            return View();
+            var allAds = await this.advertisementService.ShowAllAdvertisement();
+            var resultAllAds = this.mapper.Map<List<AdvertisementViewModel>>(allAds);
+            return View(resultAllAds);
         }
 
     

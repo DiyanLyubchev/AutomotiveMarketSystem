@@ -4,7 +4,7 @@ using Oracle.EntityFrameworkCore.Metadata;
 
 namespace AutomotiveMarketSystem.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -260,15 +260,15 @@ namespace AutomotiveMarketSystem.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Discriminator", "Name", "NormalizedName" },
-                values: new object[] { "ca678235-7571-4177-984f-e9d1957b0187", "348dea58-4bf5-4f63-9168-0e6acbee9695", "UserRole", "Admin", "ADMIN" });
+                values: new object[] { "ca678235-7571-4177-984f-e9d1957b0187", "bb453e59-0d38-4654-abb0-dcdc316997ac", "UserRole", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "c23c3678-6194-4b7e-a928-09614190eb62", 0, "b57e86ee-039a-4525-a650-278b0f469ce3", "admin1@admin.com", false, true, null, "ADMIN1@ADMIN.COM", "DIYAN", "AQAAAAEAACcQAAAAEC9Pa7EMr9x5oVXuRFR0zVKml6jrrKom52ed6y1qBoYEB1Cp6RnfiJLMSzo2gnK2vg==", null, false, "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN", false, "Diyan" },
-                    { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", 0, "9565b94e-c298-443c-8fcd-a0af6479fd23", "admin2@admin.com", false, true, null, "ADMIN2@ADMIN.COM", "IVAN", "AQAAAAEAACcQAAAAELprfrSNSpEMEeDaeDWJ68uT7BNlmnsWssj6H2trq1ns6Ic1clgX1ccAsMQtEGvGMA==", null, false, "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU", false, "Ivan" }
+                    { "c23c3678-6194-4b7e-a928-09614190eb62", 0, "51267291-a8aa-442f-aa79-0d29117e2cc6", "admin1@admin.com", false, true, null, "ADMIN1@ADMIN.COM", "DIYAN", "AQAAAAEAACcQAAAAEMyXuT2plgBUGsQYbwz4TkbII8ONjh/b4L6UGySCD6JlMx/A5DuZOoKvn3lb7G07Xg==", null, false, "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN", false, "Diyan" },
+                    { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", 0, "1afe2c5d-4019-40ef-b6d1-bdd9648adf16", "admin2@admin.com", false, true, null, "ADMIN2@ADMIN.COM", "IVAN", "AQAAAAEAACcQAAAAEPdq0Ik5thwQu42ewzVqCLcfIJvM6pO/b94BrYKW1lCl+uTM1PEgUpHrVNRPfdHjiA==", null, false, "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU", false, "Ivan" }
                 });
 
             migrationBuilder.InsertData(

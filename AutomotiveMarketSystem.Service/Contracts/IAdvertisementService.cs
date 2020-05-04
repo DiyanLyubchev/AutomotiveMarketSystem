@@ -7,6 +7,6 @@ namespace AutomotiveMarketSystem.Service.Contracts
     public interface IAdvertisementService
     {
         Task<AdvertisementDto> AddAdvertisement(AdvertisementDto dto);
-        Task<IEnumerable<AdvertisementDto>> GetAds();
+        Task<IEnumerable<AdvertisementViewModelDto>> ShowAllAdvertisement();
     }
 }

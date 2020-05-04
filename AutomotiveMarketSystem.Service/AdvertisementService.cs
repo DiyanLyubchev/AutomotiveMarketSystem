@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration.UserSecrets;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AutomotiveMarketSystem.Service
@@ -15,20 +16,53 @@ namespace AutomotiveMarketSystem.Service
     public class AdvertisementService : IAdvertisementService
     {
         private readonly AutomotiveMarketSystemContext context;
+        private readonly ICarService carService;
         private readonly IMapper mapper;
 
-        public AdvertisementService(AutomotiveMarketSystemContext context, IMapper mapper)
+        public AdvertisementService(AutomotiveMarketSystemContext context, IMapper mapper, ICarService carService)
         {
             this.context = context;
             this.mapper = mapper;
+            this.carService = carService;
         }
 
-        public async Task<IEnumerable<AdvertisementDto>> GetAds()
+        private IQueryable<Advertisement> GetAds()
         {
-            var allAds = await this.context.Advertisements.ToListAsync();
-            var result = this.mapper.Map<List<AdvertisementDto>>(allAds);
-            return result;
+            var allAds = this.context.Advertisements
+                .Include(car => car.Car)
+                .Include(user => user.User);
+
+            return allAds;
         }
+
+        public async Task<IEnumerable<AdvertisementViewModelDto>> ShowAllAdvertisement()
+        {
+            var allAds = this.GetAds();
+            var resultAds = new List<AdvertisementViewModelDto>();
+
+            foreach (var ad in allAds)
+            {
+                var currentUser = await this.context.Users.FirstOrDefaultAsync(userId => userId.Id == ad.UserId);
+                var currentCar = await this.context.Cars.FirstOrDefaultAsync(carId => carId.Id == ad.CarId);
+                resultAds.Add(new AdvertisementViewModelDto
+                {
+                    Id = ad.Id,
+                    BrandName = await this.carService.GetBrandNameById(currentCar.CarBrandId),
+                    ModelName = await this.carService.GetModelNameById(currentCar.CarModelId),
+                    Door = currentCar.Door,
+                    Price = currentCar.Price,
+                    ProductionYear = currentCar.ProductionYear,
+                    PublishDate = ad.PublishDate,
+                    UserName = currentUser.UserName,
+                    EngineTypeId = currentCar.EngineTypeStatusId
+                });
+            }
+
+
+            return resultAds;
+
+        }
+
 
         public async Task<AdvertisementDto> AddAdvertisement(AdvertisementDto dto)
         {
@@ -45,7 +79,7 @@ namespace AutomotiveMarketSystem.Service
             var adId = await GetNextValue();
             newAd.Id = adId;
             newAd.UserId = dto.UserId;
-          //  newAd.User = currentUser;
+            //  newAd.User = currentUser;
             newAd.PublishDate = DateTime.Now;
 
             await this.context.Advertisements.AddAsync(newAd);
