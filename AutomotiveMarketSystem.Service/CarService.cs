@@ -125,8 +125,14 @@ namespace AutomotiveMarketSystem.Service
 
         public async Task<ICollection<CarDto>> ShowMyCars(string userId)
         {
-            var currentUserCars = await this.context.Cars.Include(x => x.User)
-                .Where(x => x.User.Id == userId/* && x.IsDeleted == false && x.Advertisement.Id == 0*/)
+
+            var listAds = await this.context.Advertisements.Where(x => x.UserId == userId).Select(x=>x.CarId).ToListAsync();
+
+            var currentUserCars = await this.context.Cars
+                .Include(x => x.User)
+                .Include(x=>x.Advertisement)
+                .Where(x => x.User.Id == userId && x.IsDeleted == false && !listAds
+                .Contains(x.Id))
                 .ToListAsync();
 
             var currentUserCarsDto = this.mapper.Map<List<CarDto>>(currentUserCars);
