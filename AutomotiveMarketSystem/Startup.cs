@@ -51,6 +51,7 @@ namespace AutomotiveMarketSystem
 
             services.AddScoped<ICarService, CarService>();
             services.AddScoped<IAdvertisementService, AdvertisementService>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddDbContext<AutomotiveMarketSystemContext>(options =>
                       options.UseOracle(

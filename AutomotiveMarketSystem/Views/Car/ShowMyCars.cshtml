@@ -1,0 +1,34 @@
+﻿@model IEnumerable<CarViewModel>
+@{
+    ViewData["Title"] = "ShowMyCars";
+}
+@using AutomotiveMarketSystem.Data.Common;
+
+<h1>ShowMyCars</h1>
+
+<div class="row">
+    @if (Model == null)
+    {
+        <h4>You don't have any drafts</h4>
+    }
+    else
+    {
+        @foreach (var draftAd in Model)
+        {
+            <div class="col-8">
+                <span>Brand:</span> <span>@draftAd.BrandName</span>
+                <br />
+                <span>Model:</span> <span>@draftAd.ModelName</span>
+                <br />
+                <span>Price:</span> <span>@draftAd.Price BGN</span>
+                <br />
+                <span>Year:</span> <span>@draftAd.ProductionYear</span>
+                <br />
+                <span>Engine:</span> <span>@((CarFuel)draftAd.EngineTypeId)</span>
+                <br />
+                <a asp-route-Id="@draftAd.Id" asp-action="CreateAdvertisement" asp-controller="Advertisement">Create Advetisement</a>
+            </div>
+        }
+    }
+</div>
+

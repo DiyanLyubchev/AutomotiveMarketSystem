@@ -23,6 +23,7 @@ namespace AutomotiveMarketSystem.Service.Dto
         public string UserName { get; set; }
 
         public DateTime PublishDate { get; set; }
+        public bool IsDeleted { get; set; }
 
     }
 }

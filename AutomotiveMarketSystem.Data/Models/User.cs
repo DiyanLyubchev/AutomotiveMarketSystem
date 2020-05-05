@@ -8,5 +8,6 @@ namespace AutomotiveMarketSystem.Data.Models
     public class User : IdentityUser
     {
         public virtual ICollection<Advertisement> Advertisements { get; set; } 
+        public virtual ICollection<Car> Cars { get; set; }
     }
 }

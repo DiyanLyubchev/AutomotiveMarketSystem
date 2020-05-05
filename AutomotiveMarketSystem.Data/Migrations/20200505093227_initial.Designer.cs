@@ -10,8 +10,8 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace AutomotiveMarketSystem.Data.Migrations
 {
     [DbContext(typeof(AutomotiveMarketSystemContext))]
-    [Migration("20200504134332_Initial")]
-    partial class Initial
+    [Migration("20200505093227_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,6 +29,8 @@ namespace AutomotiveMarketSystem.Data.Migrations
                     b.Property<int>("CarId")
                         .HasColumnName("CARID")
                         .HasColumnType("NUMBER(10)");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<DateTime>("PublishDate");
 
@@ -63,6 +65,8 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         .HasColumnName("ENGINETYPEID")
                         .HasColumnType("NUMBER(10)");
 
+                    b.Property<bool>("IsDeleted");
+
                     b.Property<decimal>("Price")
                         .HasColumnName("PRICE")
                         .HasColumnType("NUMBER");
@@ -71,11 +75,16 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         .HasColumnName("PRODUCTIONYEAR")
                         .HasColumnType("DATE");
 
+                    b.Property<string>("UserId")
+                        .HasColumnName("USERID");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CarBrandId");
 
                     b.HasIndex("EngineTypeId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("CAR");
                 });
@@ -5521,13 +5530,13 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         {
                             Id = "c23c3678-6194-4b7e-a928-09614190eb62",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "454e68f8-e6bf-4796-a7ce-68bd4f44c2f6",
+                            ConcurrencyStamp = "3c8d9b23-f9d1-4e75-bcd9-fee8f5e926f7",
                             Email = "admin1@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN1@ADMIN.COM",
                             NormalizedUserName = "DIYAN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGQNFntLwYeeBudZkET9n/kmW3aKzkh93kYMX0xnbepwEmAihJtexjK2EdAOzr7lpw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOhqxg046+c/2Vcp9sT95KJcP81ySMnEqz1CSd31XGkXqHNvXnl9KElLWJv06Tq0IA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN",
                             TwoFactorEnabled = false,
@@ -5537,13 +5546,13 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         {
                             Id = "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fac96f2d-749d-4f07-9509-6df79a5cb013",
+                            ConcurrencyStamp = "b8a9f77e-15ed-41c8-8ba5-9333b22b79c3",
                             Email = "admin2@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN2@ADMIN.COM",
                             NormalizedUserName = "IVAN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKEjGR81UiEBBlw1GG4YABJCzqL4b7yN0Jg5Qu4o2axfB8sPrnJujWTi7MzKzpvxFg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIFo8TJRsRo9bu8Gl17LbFExoSD9lNwxPbkzJjZYR0RedHm3Gupna4CPJeir8Zn9Lw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU",
                             TwoFactorEnabled = false,
@@ -5687,7 +5696,7 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         new
                         {
                             Id = "ca678235-7571-4177-984f-e9d1957b0187",
-                            ConcurrencyStamp = "df13e267-5e2f-43b2-bd69-2d7e76be3ae7",
+                            ConcurrencyStamp = "92d05508-eea8-4569-ae7c-e6620a4ac2b7",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -5716,6 +5725,10 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         .WithMany("Cars")
                         .HasForeignKey("EngineTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AutomotiveMarketSystem.Data.Models.User", "User")
+                        .WithMany("Cars")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("AutomotiveMarketSystem.Data.Models.CarModel", b =>

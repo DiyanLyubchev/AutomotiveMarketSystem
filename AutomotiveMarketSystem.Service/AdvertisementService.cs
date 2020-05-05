@@ -27,6 +27,7 @@ namespace AutomotiveMarketSystem.Service
         private IQueryable<Advertisement> GetAds()
         {
             var allAds = this.context.Advertisements
+                .Where(exists=>exists.IsDeleted ==false)
                 .Include(car => car.Car)
                 .Include(user => user.User);
 
@@ -40,25 +41,25 @@ namespace AutomotiveMarketSystem.Service
 
             foreach (var ad in allAds)
             {
-                var currentUser = await this.context.Users.FirstOrDefaultAsync(userId => userId.Id == ad.UserId);
-                var currentCar = await this.context.Cars.FirstOrDefaultAsync(carId => carId.Id == ad.CarId);
-                resultAds.Add(new AdvertisementViewModelDto
+                if (ad.IsDeleted == false)
                 {
-                    Id = ad.Id,
-                    BrandName = await this.carService.GetBrandNameById(currentCar.CarBrandId),
-                    ModelName = await this.carService.GetModelNameById(currentCar.CarModelId),
-                    Door = currentCar.Door,
-                    Price = currentCar.Price,
-                    ProductionYear = currentCar.ProductionYear,
-                    PublishDate = ad.PublishDate,
-                    UserName = currentUser.UserName,
-                    EngineTypeId = currentCar.EngineTypeId
-                });
+                    var currentUser = await this.context.Users.FirstOrDefaultAsync(userId => userId.Id == ad.UserId);
+                    var currentCar = await this.context.Cars.FirstOrDefaultAsync(carId => carId.Id == ad.CarId);
+                    resultAds.Add(new AdvertisementViewModelDto
+                    {
+                        Id = ad.Id,
+                        BrandName = await this.carService.GetBrandNameById(currentCar.CarBrandId),
+                        ModelName = await this.carService.GetModelNameById(currentCar.CarModelId),
+                        Door = currentCar.Door,
+                        Price = currentCar.Price,
+                        ProductionYear = currentCar.ProductionYear,
+                        PublishDate = ad.PublishDate,
+                        UserName = currentUser.UserName,
+                        EngineTypeId = currentCar.EngineTypeId
+                    });
+                }
             }
-
-
             return resultAds;
-
         }
 
 
@@ -74,7 +75,7 @@ namespace AutomotiveMarketSystem.Service
             var adId = await GetNextValue();
             newAd.Id = adId;
             newAd.UserId = dto.UserId;
-         
+
             newAd.PublishDate = DateTime.Now;
 
             await this.context.Advertisements.AddAsync(newAd);
@@ -106,11 +107,31 @@ namespace AutomotiveMarketSystem.Service
             }
 
             var currentCarId = await this.context.Advertisements
-                .Where(advId => advId.Id == id)
+                .Where(advId => advId.Id == id && advId.IsDeleted==false)
                 .Select(carId => carId.CarId)
                 .SingleOrDefaultAsync();
 
             return currentCarId;
+        }
+
+
+        public async Task DeleteAd(int advertisementId)
+        {
+            // var adDto = this.mapper.Map<AdvertisementDto>(advertisementViewModel);
+            var ad = await this.context.Advertisements.SingleOrDefaultAsync(adId => adId.Id == advertisementId);
+
+            if (ad == null || ad.IsDeleted == true)
+            {
+                throw new ArgumentException($"There is no ad with id: {advertisementId} !");
+            }
+
+
+            var carToBeDeleted = await this.context.Cars.SingleOrDefaultAsync(car=>car.Id == ad.CarId && car.IsDeleted == false);
+           
+
+            ad.IsDeleted = true;
+            carToBeDeleted.IsDeleted = true;
+            await this.context.SaveChangesAsync();
         }
     }
 }

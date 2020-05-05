@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
+using AutomotiveMarketSystem.Models;
 using AutomotiveMarketSystem.Service.Contracts;
 using AutomotiveMarketSystem.Service.Dto;
 using Microsoft.AspNetCore.Authorization;
@@ -13,10 +15,12 @@ namespace AutomotiveMarketSystem.Controllers
     public class AdvertisementController : Controller
     {
         private readonly IAdvertisementService advertisementService;
+        private readonly IMapper mapper;
 
-        public AdvertisementController(IAdvertisementService advertisementService)
+        public AdvertisementController(IAdvertisementService advertisementService, IMapper mapper)
         {
             this.advertisementService = advertisementService;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -31,7 +35,21 @@ namespace AutomotiveMarketSystem.Controllers
             var dto = new AdvertisementDto { CarId = id, UserId = userId };
             await this.advertisementService.AddAdvertisement(dto);
 
-            return RedirectToAction("Index" , "Home");
+            return RedirectToAction("Index", "Home");
         }
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            //var adVMDto = this.mapper.Map<AdvertisementViewModelDto>(advertisementViewModel);
+                        
+            await this.advertisementService.DeleteAd(id);
+            return RedirectToAction("Index", "Home");
+        }
+        //[HttpPost]
+        //public async Task<IActionResult> Delete(int id)
+        //{
+        //    await this.advertisementService.DeleteAd(id);
+        //    return Ok();
+        //}
     }
 }

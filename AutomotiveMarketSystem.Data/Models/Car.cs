@@ -22,11 +22,15 @@ namespace AutomotiveMarketSystem.Data.Models
 
         [ForeignKey("EngineTypeStatus")]
         public int EngineTypeId { get; set; }
-        
+
         public virtual EngineTypeStatus EngineType { get; set; }
-      
-        
+
+
         public virtual Advertisement Advertisement { get; set; }
 
+        public bool IsDeleted { get; set; }
+
+        public string UserId { get; set; }
+        public virtual User User { get; set; }
     }
 }

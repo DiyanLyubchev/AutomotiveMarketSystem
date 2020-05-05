@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace AutomotiveMarketSystem.Service
@@ -14,11 +16,13 @@ namespace AutomotiveMarketSystem.Service
     public class CarService : ICarService
     {
         private readonly AutomotiveMarketSystemContext context;
+        private readonly IUserService userService;
         private readonly IMapper mapper;
 
-        public CarService(AutomotiveMarketSystemContext context, IMapper mapper)
+        public CarService(AutomotiveMarketSystemContext context, IUserService userService, IMapper mapper)
         {
             this.context = context;
+            this.userService = userService;
             this.mapper = mapper;
         }
 
@@ -30,7 +34,9 @@ namespace AutomotiveMarketSystem.Service
 
             var engine = await this.context.StatusEngines
            .Include(cars => cars.Cars)
-           .SingleOrDefaultAsync(carBrand => carBrand.Id == car.EngineTypeStatusId);
+           .SingleOrDefaultAsync(carBrand => carBrand.Id == car.EngineTypeId);
+
+            //var userId = await this.userService.GetUserById()
 
             var carId = await GetNextValue();
 
@@ -41,10 +47,11 @@ namespace AutomotiveMarketSystem.Service
                 CarBrandId = car.CarBrandId,
                 CarModelId = car.CarModelId,
                 Door = car.Door,
-                EngineTypeId = car.EngineTypeStatusId,
+                EngineTypeId = car.EngineTypeId,
                 EngineType = engine,
                 Price = car.Price,
-                ProductionYear = car.ProductionYear
+                ProductionYear = car.ProductionYear,
+                UserId = car.UserId,
             };
 
             await this.context.Cars.AddAsync(newCar);
@@ -115,9 +122,19 @@ namespace AutomotiveMarketSystem.Service
         public async Task<CarDto> GetCarBy(int carId)
         {
             var currentCar = await this.context.Cars
-                .SingleOrDefaultAsync(id => id.Id == carId);
+                .SingleOrDefaultAsync(id => id.Id == carId && id.IsDeleted == false);
 
             return this.mapper.Map<CarDto>(currentCar);
+        }
+
+        public async Task<ICollection<CarDto>> ShowMyCars(string userId)
+        {
+            var currentUserCars = await this.context.Cars.Include(x => x.User)
+                .Where(x => x.User.Id == userId/* && x.IsDeleted == false && x.Advertisement.Id == 0*/)
+                .ToListAsync();
+
+            var currentUserCarsDto = this.mapper.Map<List<CarDto>>(currentUserCars);
+            return currentUserCarsDto;
         }
     }
 }

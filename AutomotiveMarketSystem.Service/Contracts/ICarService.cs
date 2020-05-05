@@ -17,5 +17,6 @@ namespace AutomotiveMarketSystem.Service.Contracts
         Task<string> GetModelNameById(int id);
 
         Task<CarDto> GetCarBy(int carId);
+        Task<ICollection<CarDto>> ShowMyCars(string userId);
     }
 }

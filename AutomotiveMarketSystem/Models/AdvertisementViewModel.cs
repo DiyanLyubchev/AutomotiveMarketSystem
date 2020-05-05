@@ -21,6 +21,7 @@ namespace AutomotiveMarketSystem.Models
         public string UserName { get; set; }
 
         public DateTime PublishDate { get; set; }
-       
+        public bool IsDeleted { get; set; }
+
     }
 }

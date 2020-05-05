@@ -30,7 +30,7 @@ namespace AutomotiveMarketSystem.Data
         public virtual DbSet<CarModel> CarModels { get; set; }
         public virtual DbSet<EngineTypeStatus> StatusEngines { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
-       
+             
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Car>(entity =>
@@ -59,6 +59,10 @@ namespace AutomotiveMarketSystem.Data
                  .HasColumnName("PRICE")
                  .HasColumnType("NUMBER");
 
+                entity.Property(userId => userId.UserId)
+                  .HasColumnName("USERID");
+                  //.HasColumnType("VARCHAR2)");
+
                 entity.HasOne(adv => adv.Advertisement)
                 .WithOne(car => car.Car);
 
@@ -66,12 +70,14 @@ namespace AutomotiveMarketSystem.Data
                 .WithMany(x => x.Cars)
                 .HasForeignKey(keybr => keybr.CarBrandId);
 
-
                 entity.HasOne(engineType => engineType.EngineType)
                 .WithMany(car => car.Cars)
                 .HasForeignKey(fKey => fKey.EngineTypeId);
-            });
 
+                entity.HasOne(user => user.User)
+                .WithMany(car => car.Cars);
+                //.HasForeignKey(fkey => fkey.UserId);
+            });
 
             builder.Entity<Advertisement>(entity =>
             {

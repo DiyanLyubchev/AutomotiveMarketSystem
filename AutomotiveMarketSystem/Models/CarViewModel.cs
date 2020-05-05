@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutomotiveMarketSystem.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -12,10 +13,8 @@ namespace AutomotiveMarketSystem.Models
         [Range(2, 5)]
         public int Door { get; set; }
 
-
         [Required]
         public DateTime ProductionYear { get; set; } = DateTime.Now;
-
 
         [Required]
         [Range(1, 10000000)]
@@ -23,8 +22,8 @@ namespace AutomotiveMarketSystem.Models
 
         [Required]
         [Range(1, 4)]
-        public int EngineTypeStatusId { get; set; }
-
+        public int EngineTypeId { get; set; }
+        
         public int CarBrandId { get; set; }
 
         public int CarModelId { get; set; }
@@ -38,5 +37,8 @@ namespace AutomotiveMarketSystem.Models
         public string BrandName { get; set; }
 
         public string ModelName { get; set; }
+
+        public bool IsDeleted { get; set; }
+        public string UserId { get; set; }
     }
 }

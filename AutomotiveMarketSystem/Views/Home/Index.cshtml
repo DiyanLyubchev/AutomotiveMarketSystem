@@ -24,25 +24,34 @@
         <tbody>
             @foreach (var ad in Model)
             {
-                <tr>
-                    <td>@ad.BrandName</td>
-                    <td>@ad.ModelName</td>
-                    <td>@ad.ProductionYear</td>
-                    <td>@ad.Door</td>
-                    <td>@(((CarFuel)ad.EngineTypeId).ToString())</td>
-                    <td>@ad.Price</td>
-                    <td>@ad.PublishDate</td>
-                    <td>@ad.UserName</td>
-                    @if (User.Identity.IsAuthenticated && User.Identity.Name == ad.UserName)
-                    {
-                        <td>
-                            <button class="btn alert-primary" onclick="window.location.href='@Url.Action("Update", "Car", ad)'">
-                                Update
-                            </button>
-                        </td>
-                    }
+                if (ad.IsDeleted == false)
+                {
+                    <tr>
+                        <td>@ad.BrandName</td>
+                        <td>@ad.ModelName</td>
+                        <td>@ad.ProductionYear</td>
+                        <td>@ad.Door</td>
+                        <td>@(((CarFuel)ad.EngineTypeId).ToString())</td>
+                        <td>@ad.Price</td>
+                        <td>@ad.PublishDate</td>
+                        <td>@ad.UserName</td>
+                        @if (User.Identity.IsAuthenticated && User.Identity.Name == ad.UserName)
+                        {
+                            <td>
+                                <button class="btn alert-primary" onclick="window.location.href='@Url.Action("Update", "Car", ad)'">
+                                    Update
+                                </button>
+                            </td>
 
-                </tr>
+                            <td>
+                                <button class="btn alert-dark" onclick="window.location.href='@Url.Action("Delete", "Advertisement", ad)'">
+                                    Delete
+                                </button>
+                            </td>
+                        }
+
+                    </tr>
+                }
             }
         </tbody>
     </table>
@@ -90,11 +99,11 @@
         <div class="street-stripe"></div>
         <div class="hill">
             <div class="tree-1">
-                    <div class="branch-1"></div>
-                    <div class="branch-2"></div>
-                    <div class="branch-3"></div>
-                </div>
-                <div class="tree-1">
+                <div class="branch-1"></div>
+                <div class="branch-2"></div>
+                <div class="branch-3"></div>
+            </div>
+            <div class="tree-1">
                 <div class="branch"></div>
                 <div class="trunk"></div>
             </div>

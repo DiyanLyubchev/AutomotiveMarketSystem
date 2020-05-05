@@ -16,7 +16,7 @@
         <br />
         <span>Year:</span> <span>@Model.ProductionYear</span>
         <br />
-        <span>Engine:</span> <span>@((CarFuel)Model.EngineTypeStatusId)</span>
+        <span>Engine:</span> <span>@((CarFuel)Model.EngineTypeId)</span>
         <br />
         <a asp-route-Id="@Model.Id" asp-action="CreateAdvertisement" asp-controller="Advertisement">Create Advetisement</a>
     </div>
