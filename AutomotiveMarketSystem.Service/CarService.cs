@@ -7,8 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace AutomotiveMarketSystem.Service
@@ -35,8 +33,6 @@ namespace AutomotiveMarketSystem.Service
             var engine = await this.context.StatusEngines
            .Include(cars => cars.Cars)
            .SingleOrDefaultAsync(carBrand => carBrand.Id == car.EngineTypeId);
-
-            //var userId = await this.userService.GetUserById()
 
             var carId = await GetNextValue();
 
@@ -135,6 +131,22 @@ namespace AutomotiveMarketSystem.Service
 
             var currentUserCarsDto = this.mapper.Map<List<CarDto>>(currentUserCars);
             return currentUserCarsDto;
+        }
+
+
+        public async Task UpdateCar(CarDto dto)
+        {
+            var currentCar = await this.context.Cars
+                .SingleOrDefaultAsync(carId => carId.Id == dto.Id && carId.IsDeleted == false);
+
+            currentCar.Price = dto.Price;
+            currentCar.ProductionYear = dto.ProductionYear;
+            currentCar.CarModelId = dto.CarModelId;
+            currentCar.CarBrandId = dto.CarBrandId;
+            currentCar.Door = dto.Door;
+            currentCar.EngineTypeId = dto.EngineTypeId;
+
+            await this.context.SaveChangesAsync();   
         }
     }
 }

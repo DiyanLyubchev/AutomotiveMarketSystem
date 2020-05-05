@@ -10,8 +10,8 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace AutomotiveMarketSystem.Data.Migrations
 {
     [DbContext(typeof(AutomotiveMarketSystemContext))]
-    [Migration("20200505093227_initial")]
-    partial class initial
+    [Migration("20200505131243_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -5530,13 +5530,13 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         {
                             Id = "c23c3678-6194-4b7e-a928-09614190eb62",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3c8d9b23-f9d1-4e75-bcd9-fee8f5e926f7",
+                            ConcurrencyStamp = "ca1fbfc6-5958-43a8-bd99-8d660b90edf9",
                             Email = "admin1@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN1@ADMIN.COM",
                             NormalizedUserName = "DIYAN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOhqxg046+c/2Vcp9sT95KJcP81ySMnEqz1CSd31XGkXqHNvXnl9KElLWJv06Tq0IA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPlvvm3GrynDs4ZlZPsCiuysDAks6ad7HUhBHuyIFqXXxoaMFIgQWoXqaxWBQ7PZ8w==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN",
                             TwoFactorEnabled = false,
@@ -5546,13 +5546,13 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         {
                             Id = "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b8a9f77e-15ed-41c8-8ba5-9333b22b79c3",
+                            ConcurrencyStamp = "cd9e1c1d-5fb2-49fb-ad2c-eb13b715d0ce",
                             Email = "admin2@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN2@ADMIN.COM",
                             NormalizedUserName = "IVAN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIFo8TJRsRo9bu8Gl17LbFExoSD9lNwxPbkzJjZYR0RedHm3Gupna4CPJeir8Zn9Lw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFX5b8F7cmLOf0cRKP0w5pETVkdIFGmtHtgCOuqcTDFyywlw2C9Q+dXvLY5jM19b1g==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU",
                             TwoFactorEnabled = false,
@@ -5696,7 +5696,7 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         new
                         {
                             Id = "ca678235-7571-4177-984f-e9d1957b0187",
-                            ConcurrencyStamp = "92d05508-eea8-4569-ae7c-e6620a4ac2b7",
+                            ConcurrencyStamp = "37c5ac2d-7c52-4936-bb8d-6f5c626a029a",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

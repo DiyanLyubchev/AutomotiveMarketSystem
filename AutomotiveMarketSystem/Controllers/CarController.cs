@@ -114,7 +114,7 @@ namespace AutomotiveMarketSystem.Controllers
                 var currentCar = await this.carService.GetCarBy(carId);
                 var carVm = await GetCarViewModel(currentCar);
 
-                return View("AddCar", carVm);
+                return View(carVm);
             }
             catch (ArgumentException ex)
             {
@@ -130,9 +130,9 @@ namespace AutomotiveMarketSystem.Controllers
             {
                 var currentCar = this.mapper.Map<CarDto>(vm);
 
-                //   await this.carService.UpdateCar(currentCar);
+                await this.carService.UpdateCar(currentCar);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
             catch (ArgumentException ex)
             {

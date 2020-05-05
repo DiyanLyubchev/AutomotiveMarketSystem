@@ -1,0 +1,68 @@
+﻿@model CarViewModel
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h4>Update Car</h4>
+<div class="row">
+    <div class="col-md-4">
+        <input asp-for="Id" hidden />
+        <form asp-action="AddCar">
+
+            <div class="select">
+                <select required asp-for="CarBrandId"
+                        asp-items="@(new SelectList(Model.AllCarModel,"Id","BrandName"))"
+                        onchange="populateBrand(event.srcElement.value, 'CarModelId')">
+                    <option value="">Select Brand</option>
+                </select>
+            </div>
+            <br />
+            <div class="select">
+                <select required asp-for="CarModelId"
+                        asp-items="@(new SelectList(Model.AllCarBrandByModel,"Id","ModelName"))">
+                    <option value="">Select Model</option>
+                </select>
+            </div>
+            <br />
+            <div class="select">
+                <select required asp-for="EngineTypeId">
+                    <option value="">Select Engine Type</option>
+                    <option value="1">Gas</option>
+                    <option value="2">Diesel</option>
+                    <option value="3">Electric</option>
+                    <option value="4">Hybrid</option>
+                </select>
+            </div>
+            <br />
+            <div class="select">
+                <select required asp-for="Door">
+                    <option value="">Select Doors</option>
+                    <option value="2">Two Doors</option>
+                    <option value="3">Three Doors</option>
+                    <option value="4">Four Doors</option>
+                    <option value="5">Five Doors</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProductionYear" class="control-label"></label>
+                <input asp-for="ProductionYear" class="form-control" />
+                <span asp-validation-for="ProductionYear" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" asp-action="Update" asp-controller="Car" class="btn alert-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<strong>
+    <a style="color:dodgerblue" href="javascript:history.go(-1)" title="Go to previous page" >Go back</a>
+</strong>
