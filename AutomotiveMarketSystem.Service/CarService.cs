@@ -141,7 +141,7 @@ namespace AutomotiveMarketSystem.Service
         }
 
 
-        public async Task UpdateCar(CarDto dto)
+        public async Task<CarDto> UpdateCar(CarDto dto)
         {
             var currentCar = await this.context.Cars
                 .SingleOrDefaultAsync(carId => carId.Id == dto.Id && carId.IsDeleted == false);
@@ -154,6 +154,8 @@ namespace AutomotiveMarketSystem.Service
             currentCar.EngineTypeId = dto.EngineTypeId;
 
             await this.context.SaveChangesAsync();
+
+            return this.mapper.Map<CarDto>(currentCar);
         }
     }
 }

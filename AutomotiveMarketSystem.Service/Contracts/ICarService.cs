@@ -20,6 +20,6 @@ namespace AutomotiveMarketSystem.Service.Contracts
 
         Task<ICollection<CarDto>> ShowMyCars(string userId);
 
-        Task UpdateCar(CarDto dto);
+        Task<CarDto> UpdateCar(CarDto dto);
     }
 }

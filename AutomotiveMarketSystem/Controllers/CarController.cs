@@ -20,16 +20,14 @@ namespace AutomotiveMarketSystem.Controllers
     {
         private readonly ICarService carService;
         private readonly IAdvertisementService advertisementService;
-        private readonly IUserService userService;
         private readonly IHostingEnvironment hostingEnvironment;
         private readonly IMapper mapper;
 
-        public CarController(ICarService carService, IMapper mapper, IAdvertisementService advertisementService, IUserService userService, IHostingEnvironment hostingEnvironment)
+        public CarController(ICarService carService, IMapper mapper, IAdvertisementService advertisementService, IHostingEnvironment hostingEnvironment)
         {
             this.mapper = mapper;
             this.carService = carService;
             this.advertisementService = advertisementService;
-            this.userService = userService;
             this.hostingEnvironment = hostingEnvironment;
         }
 
@@ -87,7 +85,7 @@ namespace AutomotiveMarketSystem.Controllers
                 var newCarfromUi = this.mapper.Map<CarDto>(viewModel);
                 newCarfromUi.UserId = userId;
                 var newCar = await this.carService.AddCar(newCarfromUi);
-                
+
 
 
                 var newCarFromData = this.mapper.Map<CarViewModel>(newCar);
@@ -113,7 +111,7 @@ namespace AutomotiveMarketSystem.Controllers
             return (string.Empty, false);
         }
 
-        public async Task<CarViewModel> GetCarViewModel(CarDto carDto)
+        private async Task<CarViewModel> GetCarViewModel(CarDto carDto)
         {
 
             var models = await this.carService.GetAllModelAsync();
@@ -150,8 +148,7 @@ namespace AutomotiveMarketSystem.Controllers
         {
             try
             {
-                var carId = await this.advertisementService.GetAdById(id);
-                var currentCar = await this.carService.GetCarBy(carId);
+                var currentCar = await this.carService.GetCarBy(id);
                 var carVm = await GetCarViewModel(currentCar);
 
                 return View(carVm);
@@ -170,9 +167,13 @@ namespace AutomotiveMarketSystem.Controllers
             {
                 var currentCar = this.mapper.Map<CarDto>(vm);
 
-                await this.carService.UpdateCar(currentCar);
+                var updatedCar = await this.carService.UpdateCar(currentCar);
+                var newCarFromData = this.mapper.Map<CarViewModel>(updatedCar);
 
-                return RedirectToAction("Index", "Home");
+                newCarFromData.BrandName = await this.carService.GetBrandNameById(updatedCar.CarBrandId);
+                newCarFromData.ModelName = await this.carService.GetModelNameById(updatedCar.CarModelId);
+
+                return View("AddCarToAdvetisement", newCarFromData);
             }
             catch (ArgumentException ex)
             {

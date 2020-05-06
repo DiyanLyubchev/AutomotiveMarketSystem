@@ -38,7 +38,7 @@
                         @if (User.Identity.IsAuthenticated && User.Identity.Name == ad.UserName)
                         {
                             <td>
-                                <button class="btn alert-primary" onclick="window.location.href='@Url.Action("Update", "Car", ad)'">
+                                <button class="btn alert-primary" onclick="window.location.href='@Url.Action("UpdateAdvertisement", "Advertisement", ad)'">
                                     Update
                                 </button>
                             </td>
