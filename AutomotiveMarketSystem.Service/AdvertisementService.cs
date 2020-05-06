@@ -108,6 +108,7 @@ namespace AutomotiveMarketSystem.Service
             }
 
             var currentCarId = await this.context.Advertisements
+                .Include(car => car.Car)
                 .Where(advId => advId.Id == id && advId.IsDeleted==false)
                 .Select(carId => carId.CarId)
                 .SingleOrDefaultAsync();

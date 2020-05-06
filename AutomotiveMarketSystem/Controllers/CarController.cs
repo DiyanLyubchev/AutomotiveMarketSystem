@@ -128,6 +128,7 @@ namespace AutomotiveMarketSystem.Controllers
                 CarBrandId = carDto.CarBrandId,
                 CarModelId = carDto.CarModelId,
                 Price = carDto.Price,
+                AdvertisementId = carDto.AdvertisementId,
                 ProductionYear = carDto.ProductionYear,
                 AllCarModel = allmodells,
                 UserId = carDto.UserId,
@@ -151,7 +152,7 @@ namespace AutomotiveMarketSystem.Controllers
                 var currentCar = await this.carService.GetCarBy(id);
                 var carVm = await GetCarViewModel(currentCar);
 
-                return View(carVm);
+                return View("Update", carVm);
             }
             catch (ArgumentException ex)
             {

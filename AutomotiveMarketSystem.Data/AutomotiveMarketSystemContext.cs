@@ -1,14 +1,7 @@
 ﻿using AutomotiveMarketSystem.Data.Models;
 using AutomotiveMarketSystem.Data.Seed;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 
 namespace AutomotiveMarketSystem.Data
 {

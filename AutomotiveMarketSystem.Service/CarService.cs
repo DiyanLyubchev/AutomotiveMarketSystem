@@ -144,6 +144,7 @@ namespace AutomotiveMarketSystem.Service
         public async Task<CarDto> UpdateCar(CarDto dto)
         {
             var currentCar = await this.context.Cars
+                .Include(adv => adv.Advertisement)
                 .SingleOrDefaultAsync(carId => carId.Id == dto.Id && carId.IsDeleted == false);
 
             currentCar.Price = dto.Price;
@@ -155,7 +156,9 @@ namespace AutomotiveMarketSystem.Service
 
             await this.context.SaveChangesAsync();
 
-            return this.mapper.Map<CarDto>(currentCar);
+            var resultUpdatedCar = this.mapper.Map<CarDto>(currentCar);
+
+            return resultUpdatedCar;
         }
     }
 }

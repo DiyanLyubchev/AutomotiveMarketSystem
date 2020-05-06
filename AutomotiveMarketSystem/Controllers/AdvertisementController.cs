@@ -48,6 +48,7 @@ namespace AutomotiveMarketSystem.Controllers
             await this.advertisementService.DeleteAd(id);
             return RedirectToAction("Index", "Home");
         }
+
         private async Task<CarViewModel> GetCarViewModel(CarDto carDto)
         {
 
@@ -99,12 +100,12 @@ namespace AutomotiveMarketSystem.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> UpdateAdvertisement(CarViewModel vm)
+        public async Task<IActionResult> UpdateAdvertisement(int id, CarViewModel vm)
         {
             try
             {
                 var currentCar = this.mapper.Map<CarDto>(vm);
-
+                currentCar.Id = id;
                 await this.carService.UpdateCar(currentCar);
 
                 return RedirectToAction("Index", "Home");
