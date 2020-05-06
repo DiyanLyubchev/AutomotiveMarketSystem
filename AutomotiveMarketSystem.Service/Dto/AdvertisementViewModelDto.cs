@@ -25,5 +25,6 @@ namespace AutomotiveMarketSystem.Service.Dto
         public DateTime PublishDate { get; set; }
         public bool IsDeleted { get; set; }
 
+        public string ImagePath { get; set; }
     }
 }

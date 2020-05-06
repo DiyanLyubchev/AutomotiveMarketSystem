@@ -35,6 +35,7 @@
                         <td>@ad.Price</td>
                         <td>@ad.PublishDate</td>
                         <td>@ad.UserName</td>
+                        <td> <img class="card-img-top image-bar-index" max-width:100% height:auto src="@ad.ImagePath" alt="Smiley face"></td>
                         @if (User.Identity.IsAuthenticated && User.Identity.Name == ad.UserName)
                         {
                             <td>

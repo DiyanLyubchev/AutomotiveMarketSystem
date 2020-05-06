@@ -22,6 +22,7 @@ namespace AutomotiveMarketSystem.Models
 
         public DateTime PublishDate { get; set; }
         public bool IsDeleted { get; set; }
+        public string ImagePath { get; set; }
 
     }
 }

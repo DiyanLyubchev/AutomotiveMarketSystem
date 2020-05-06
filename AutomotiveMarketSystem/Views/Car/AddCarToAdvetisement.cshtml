@@ -23,11 +23,11 @@
 
         @if (Model.ImagePath != null)
         {
-            <a asp-controller="Car" asp-action="AddCar" asp-route-id="@Model.Id"> <h5 class="card-title">  <img class="card-img-top image-bar-index" src="@Model.ImagePath" alt="Smiley face"></h5></a>
+            <a asp-controller="Car" asp-action="AddCar" asp-route-id="@Model.Id"> <h5 class="card-title">  <img class="card-img-top image-bar-index" max-width:100% height:auto src="@Model.ImagePath" alt="Smiley face"></h5></a>
         }
         else
         {
-            <img class="card-img-top image-bar-index" src="~/images/noPhotoAvailable.jpg" alt="Card image cap">
+            <img class="card-img-top image-bar-index" width="266" height="200" src="~/images/noPhotoAvailable.jpg" alt="Card image cap">
         }
         <br />
         <a asp-route-Id="@Model.Id" asp-action="CreateAdvertisement" asp-controller="Advertisement">Create Advetisement</a>
