@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using AutomotiveMarketSystem.Models;
 using AutomotiveMarketSystem.Service;
 using AutomotiveMarketSystem.Service.Contracts;
 using AutomotiveMarketSystem.Service.Dto;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+
 
 namespace AutomotiveMarketSystem.Controllers
 {
@@ -18,14 +21,16 @@ namespace AutomotiveMarketSystem.Controllers
         private readonly ICarService carService;
         private readonly IAdvertisementService advertisementService;
         private readonly IUserService userService;
+        private readonly IHostingEnvironment hostingEnvironment;
         private readonly IMapper mapper;
 
-        public CarController(ICarService carService, IMapper mapper, IAdvertisementService advertisementService, IUserService userService)
+        public CarController(ICarService carService, IMapper mapper, IAdvertisementService advertisementService, IUserService userService, IHostingEnvironment hostingEnvironment)
         {
             this.mapper = mapper;
             this.carService = carService;
             this.advertisementService = advertisementService;
             this.userService = userService;
+            this.hostingEnvironment = hostingEnvironment;
         }
 
         public IActionResult Index()
@@ -48,7 +53,67 @@ namespace AutomotiveMarketSystem.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        private async Task<CarViewModel> GetCarViewModel(CarDto carDto)
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> AddCar(CarViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                if (viewModel.Image != null)
+                {
+                    var (extension, isValid) = GetFileExtension(viewModel.Image.ContentType);
+
+                    if (!isValid)
+                    {
+                        TempData["ErrorMessage"] = "Invalid file type, please upload image!";
+                        return RedirectToAction("AddCar", "Car");
+                    }
+                    string destinationFolder = Path.Combine(hostingEnvironment.WebRootPath, "images/cars");
+                    string fileName = Guid.NewGuid().ToString() + "_" + viewModel.Image.FileName;
+                    string imagePath = Path.Combine(destinationFolder, fileName);
+                    viewModel.Image.CopyTo(new FileStream(imagePath, FileMode.Create));
+                    viewModel.ImagePath = $"/images/cars/" + fileName;
+                }
+
+
+                var newCarfromUi = this.mapper.Map<CarDto>(viewModel);
+                newCarfromUi.UserId = userId;
+                var newCar = await this.carService.AddCar(newCarfromUi);
+                
+
+
+                var newCarFromData = this.mapper.Map<CarViewModel>(newCar);
+
+                newCarFromData.BrandName = await this.carService.GetBrandNameById(newCar.CarBrandId);
+                newCarFromData.ModelName = await this.carService.GetModelNameById(newCar.CarModelId);
+
+                return View("AddCarToAdvetisement", newCarFromData);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        private (string extension, bool isValid) GetFileExtension(string contentType)
+        {
+            if (contentType == "image/jpeg")
+                return (".jpg", true);
+            if (contentType == "image/png")
+                return (".png", true);
+
+            return (string.Empty, false);
+        }
+
+        public async Task<CarViewModel> GetCarViewModel(CarDto carDto)
         {
 
             var models = await this.carService.GetAllModelAsync();
@@ -68,6 +133,8 @@ namespace AutomotiveMarketSystem.Controllers
                 ProductionYear = carDto.ProductionYear,
                 AllCarModel = allmodells,
                 UserId = carDto.UserId,
+                ImagePath = carDto.ImagePath,
+                Image = carDto.Image,
                 AllCarBrandByModel = carDto.CarBrandId == 0 ?
                     Enumerable.Empty<CarModelViewModel>() : carBrandView
             };
@@ -75,34 +142,7 @@ namespace AutomotiveMarketSystem.Controllers
             return carViewModel;
         }
 
-        [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> AddCar(CarViewModel viewModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
-            try
-            {
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var newCarfromUi = this.mapper.Map<CarDto>(viewModel);
-                newCarfromUi.UserId = userId;
-                var newCar = await this.carService.AddCar(newCarfromUi);                
-                
-                var newCarFromData = this.mapper.Map<CarViewModel>(newCar);
-               
-                newCarFromData.BrandName = await this.carService.GetBrandNameById(newCar.CarBrandId);
-                newCarFromData.ModelName = await this.carService.GetModelNameById(newCar.CarModelId);
-               
-                return View("AddCarToAdvetisement", newCarFromData);
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
 
         [HttpGet]
         [Authorize]
@@ -132,7 +172,7 @@ namespace AutomotiveMarketSystem.Controllers
 
                 await this.carService.UpdateCar(currentCar);
 
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index", "Home");
             }
             catch (ArgumentException ex)
             {
@@ -154,7 +194,7 @@ namespace AutomotiveMarketSystem.Controllers
                 item.BrandName = await this.carService.GetBrandNameById(item.CarBrandId);
                 item.ModelName = await this.carService.GetModelNameById(item.CarModelId);
             }
-         
+
             return View(result);
         }
     }

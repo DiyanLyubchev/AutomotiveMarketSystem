@@ -61,7 +61,10 @@ namespace AutomotiveMarketSystem.Data
 
                 entity.Property(userId => userId.UserId)
                   .HasColumnName("USERID");
-                  //.HasColumnType("VARCHAR2)");
+                //.HasColumnType("VARCHAR2)");
+
+                entity.Property(img => img.ImagePath)
+                .HasColumnName("IMAGEPATH");
 
                 entity.HasOne(adv => adv.Advertisement)
                 .WithOne(car => car.Car);

@@ -21,4 +21,9 @@
     <ProjectReference Include="..\AutomotiveMarketSystem.Service\AutomotiveMarketSystem.Service.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\cars\" />
+  </ItemGroup>
+
 </Project>

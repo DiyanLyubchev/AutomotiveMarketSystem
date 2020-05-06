@@ -1,7 +1,6 @@
-﻿using AutomotiveMarketSystem.Data.Models;
+﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace AutomotiveMarketSystem.Service.Dto
 {
@@ -27,5 +26,8 @@ namespace AutomotiveMarketSystem.Service.Dto
         public int CarModelId { get; set; }
         public bool IsDeleted { get; set; }
         public string UserId { get; set; }
+        public IFormFile Image { get; set; }
+
+        public string ImagePath { get; set; }
     }
 }

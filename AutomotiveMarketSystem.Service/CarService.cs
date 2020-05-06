@@ -48,6 +48,7 @@ namespace AutomotiveMarketSystem.Service
                 Price = car.Price,
                 ProductionYear = car.ProductionYear,
                 UserId = car.UserId,
+                ImagePath = car.ImagePath
             };
 
             await this.context.Cars.AddAsync(newCar);
@@ -126,11 +127,11 @@ namespace AutomotiveMarketSystem.Service
         public async Task<ICollection<CarDto>> ShowMyCars(string userId)
         {
 
-            var listAds = await this.context.Advertisements.Where(x => x.UserId == userId).Select(x=>x.CarId).ToListAsync();
+            var listAds = await this.context.Advertisements.Where(x => x.UserId == userId).Select(x => x.CarId).ToListAsync();
 
             var currentUserCars = await this.context.Cars
                 .Include(x => x.User)
-                .Include(x=>x.Advertisement)
+                .Include(x => x.Advertisement)
                 .Where(x => x.User.Id == userId && x.IsDeleted == false && !listAds
                 .Contains(x.Id))
                 .ToListAsync();
@@ -152,7 +153,7 @@ namespace AutomotiveMarketSystem.Service
             currentCar.Door = dto.Door;
             currentCar.EngineTypeId = dto.EngineTypeId;
 
-            await this.context.SaveChangesAsync();   
+            await this.context.SaveChangesAsync();
         }
     }
 }

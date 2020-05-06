@@ -4,7 +4,7 @@ using Oracle.EntityFrameworkCore.Metadata;
 
 namespace AutomotiveMarketSystem.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -213,7 +213,8 @@ namespace AutomotiveMarketSystem.Data.Migrations
                     CarModelId = table.Column<int>(nullable: false),
                     ENGINETYPEID = table.Column<int>(type: "NUMBER(10)", nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    USERID = table.Column<string>(nullable: true)
+                    USERID = table.Column<string>(nullable: true),
+                    IMAGEPATH = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -269,15 +270,15 @@ namespace AutomotiveMarketSystem.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Discriminator", "Name", "NormalizedName" },
-                values: new object[] { "ca678235-7571-4177-984f-e9d1957b0187", "37c5ac2d-7c52-4936-bb8d-6f5c626a029a", "UserRole", "Admin", "ADMIN" });
+                values: new object[] { "ca678235-7571-4177-984f-e9d1957b0187", "217c4540-9e6d-4fdf-9c3f-01313f8554db", "UserRole", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "c23c3678-6194-4b7e-a928-09614190eb62", 0, "ca1fbfc6-5958-43a8-bd99-8d660b90edf9", "admin1@admin.com", false, true, null, "ADMIN1@ADMIN.COM", "DIYAN", "AQAAAAEAACcQAAAAEPlvvm3GrynDs4ZlZPsCiuysDAks6ad7HUhBHuyIFqXXxoaMFIgQWoXqaxWBQ7PZ8w==", null, false, "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN", false, "Diyan" },
-                    { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", 0, "cd9e1c1d-5fb2-49fb-ad2c-eb13b715d0ce", "admin2@admin.com", false, true, null, "ADMIN2@ADMIN.COM", "IVAN", "AQAAAAEAACcQAAAAEFX5b8F7cmLOf0cRKP0w5pETVkdIFGmtHtgCOuqcTDFyywlw2C9Q+dXvLY5jM19b1g==", null, false, "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU", false, "Ivan" }
+                    { "c23c3678-6194-4b7e-a928-09614190eb62", 0, "4881ff44-6820-4f6e-bf5c-b1cb23047b6b", "admin1@admin.com", false, true, null, "ADMIN1@ADMIN.COM", "DIYAN", "AQAAAAEAACcQAAAAEHUm84Ixmd1uxg/BCswf0kUE3Qe+kjOjpUOuAlqAsnMAMYauwdnI7NdIv5lLBW4QfQ==", null, false, "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN", false, "Diyan" },
+                    { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", 0, "39a64d77-9d96-46fa-b9bd-d17a8be8f57a", "admin2@admin.com", false, true, null, "ADMIN2@ADMIN.COM", "IVAN", "AQAAAAEAACcQAAAAEKrQuXLLfpqOppJ3w4gl/NcZB5rYWfm0uqI9G0xh+KOqcjtHPWcbxAfH7EOXB7c3jw==", null, false, "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU", false, "Ivan" }
                 });
 
             migrationBuilder.InsertData(

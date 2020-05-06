@@ -12,11 +12,23 @@
         <br />
         <span>Model:</span> <span>@Model.ModelName</span>
         <br />
+        <span>Model:</span> <span>@Model.Door</span>
+        <br />
         <span>Price:</span> <span>@Model.Price BGN</span>
         <br />
         <span>Year:</span> <span>@Model.ProductionYear</span>
         <br />
         <span>Engine:</span> <span>@((CarFuel)Model.EngineTypeId)</span>
+        <br />
+
+        @if (Model.ImagePath != null)
+        {
+            <a asp-controller="Car" asp-action="AddCar" asp-route-id="@Model.Id"> <h5 class="card-title">  <img class="card-img-top image-bar-index" src="@Model.ImagePath" alt="Smiley face"></h5></a>
+        }
+        else
+        {
+            <img class="card-img-top image-bar-index" src="~/images/noPhotoAvailable.jpg" alt="Card image cap">
+        }
         <br />
         <a asp-route-Id="@Model.Id" asp-action="CreateAdvertisement" asp-controller="Advertisement">Create Advetisement</a>
     </div>

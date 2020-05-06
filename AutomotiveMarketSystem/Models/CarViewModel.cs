@@ -1,4 +1,4 @@
-﻿using AutomotiveMarketSystem.Data.Models;
+﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -39,6 +39,11 @@ namespace AutomotiveMarketSystem.Models
         public string ModelName { get; set; }
 
         public bool IsDeleted { get; set; }
+
         public string UserId { get; set; }
+
+        public IFormFile Image { get; set; }
+
+        public string ImagePath { get; set; }
     }
 }
