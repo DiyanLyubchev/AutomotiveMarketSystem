@@ -270,15 +270,15 @@ namespace AutomotiveMarketSystem.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Discriminator", "Name", "NormalizedName" },
-                values: new object[] { "ca678235-7571-4177-984f-e9d1957b0187", "f7ab0b17-6ba5-47b0-92e3-7e153798869c", "UserRole", "Admin", "ADMIN" });
+                values: new object[] { "ca678235-7571-4177-984f-e9d1957b0187", "eba42604-95fb-47e5-9c32-2d62d2712bce", "UserRole", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "c23c3678-6194-4b7e-a928-09614190eb62", 0, "5cf0f9b9-b547-4bcb-ab13-2a14d9d29d0b", "admin1@admin.com", false, true, null, "ADMIN1@ADMIN.COM", "DIYAN", "AQAAAAEAACcQAAAAEPicY1j8HOOWOHHPN9v8JwMdOEUtr6gue20WDov6Ycmv7+Hbkv7q1F7cKGwAsbaNVA==", null, false, "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN", false, "Diyan" },
-                    { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", 0, "2de2282b-d0ef-453a-9960-1f12ab09c717", "admin2@admin.com", false, true, null, "ADMIN2@ADMIN.COM", "IVAN", "AQAAAAEAACcQAAAAEFv+Z5e9/KKvMFX/SI6/eB2b51K8ZFtfEZsJcu8Kk6IJ1/0x2hmbJm1R9AqQcZPNzw==", null, false, "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU", false, "Ivan" }
+                    { "c23c3678-6194-4b7e-a928-09614190eb62", 0, "aacb8e88-ce4a-4d37-9037-1e3f240c9ecc", "admin1@admin.com", false, true, null, "ADMIN1@ADMIN.COM", "DIYAN", "AQAAAAEAACcQAAAAEPsRv3fuI/kYSxWKGhEwReaE3Rj28JK/3ZtO9mPIc96K1riVzYZmFw7GlAW1wYN3NA==", null, false, "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN", false, "Diyan" },
+                    { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", 0, "b5bb82ac-732c-4d62-a1e1-fbb50d0df485", "admin2@admin.com", false, true, null, "ADMIN2@ADMIN.COM", "IVAN", "AQAAAAEAACcQAAAAEAJbgp+PdOT8Z/IfoS0bOpxjdgzlo/oZ+M1G55OD2bmd2Tc6DLkcueI2ufRsbqLZhg==", null, false, "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU", false, "Ivan" }
                 });
 
             migrationBuilder.InsertData(
