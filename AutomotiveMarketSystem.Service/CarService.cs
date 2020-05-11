@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AutomotiveMarketSystem.Service
@@ -36,6 +37,8 @@ namespace AutomotiveMarketSystem.Service
 
             var carId = await GetNextValue();
 
+            
+
             var newCar = new Car
             {
                 Id = carId,
@@ -48,13 +51,29 @@ namespace AutomotiveMarketSystem.Service
                 Price = car.Price,
                 ProductionYear = car.ProductionYear,
                 UserId = car.UserId,
-                ImagePath = car.ImagePath
             };
 
+           
             await this.context.Cars.AddAsync(newCar);
-            await this.context.SaveChangesAsync();
+            await this.context.SaveChangesAsync();            
+
+            var imageDto = new CarImageDto { CarId = carId, ImagePath = car.ImagePath };
+            await this.UploadCarImage(imageDto, newCar);
 
             return this.mapper.Map<CarDto>(newCar);
+        }
+
+        private async Task UploadCarImage(CarImageDto carImageDto, Car car)
+        {
+            var carImageId = await GetNextValueCarImage();
+
+            var newCarImage = this.mapper.Map<CarImage>(carImageDto);
+            newCarImage.Id = carImageId;
+            newCarImage.Car = car;
+
+           
+            await this.context.CarImages.AddAsync(newCarImage);
+            await this.context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<CarModelDto>> GetModelByBrandIdAsync(int carBrandId)
@@ -86,6 +105,21 @@ namespace AutomotiveMarketSystem.Service
             using (var command = context.Database.GetDbConnection().CreateCommand())
             {
                 command.CommandText = $"select Car_Next_Id.NEXTVAL from dual";
+                await context.Database.OpenConnectionAsync();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    await reader.ReadAsync();
+                    return reader.GetInt32(0);
+                }
+            }
+        }
+
+        private async Task<int> GetNextValueCarImage()
+        {
+            using (var command = context.Database.GetDbConnection().CreateCommand())
+            {
+                command.CommandText = $"select CarImage_Next_Id.NEXTVAL from dual";
                 await context.Database.OpenConnectionAsync();
 
                 using (var reader = command.ExecuteReader())

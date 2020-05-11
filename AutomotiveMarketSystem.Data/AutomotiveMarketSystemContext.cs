@@ -23,7 +23,8 @@ namespace AutomotiveMarketSystem.Data
         public virtual DbSet<CarModel> CarModels { get; set; }
         public virtual DbSet<EngineTypeStatus> StatusEngines { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
-             
+        public virtual DbSet<CarImage> CarImages { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Car>(entity =>
@@ -56,9 +57,7 @@ namespace AutomotiveMarketSystem.Data
                   .HasColumnName("USERID");
                 //.HasColumnType("VARCHAR2)");
 
-                entity.Property(img => img.ImagePath)
-                .HasColumnName("IMAGEPATH");
-
+            
                 entity.HasOne(adv => adv.Advertisement)
                 .WithOne(car => car.Car);
 
@@ -139,6 +138,26 @@ namespace AutomotiveMarketSystem.Data
                 entity.HasOne(brand => brand.CarBrand)
                 .WithMany(brand => brand.BrandModels)
                 .HasForeignKey(foregnKeybran => foregnKeybran.CarBrandId);
+
+            });
+
+            builder.Entity<CarImage>(entity =>
+            {
+                entity.ToTable("CARIMAGE");
+
+                entity.HasKey(key => key.Id);
+
+                entity.Property(imgpath => imgpath.ImagePath)
+                 .HasColumnName("IMAGEPATH")
+                 .HasColumnType("NVARCHAR2(100)");
+
+                entity.Property(carId => carId.CarId)
+                .HasColumnName("CARID")
+                .HasColumnType("NUMBER(10)");
+
+                entity.HasOne(car => car.Car)
+                .WithMany(imgs => imgs.CarImages)
+                .HasForeignKey(foregnKey => foregnKey.CarId);
 
             });
 

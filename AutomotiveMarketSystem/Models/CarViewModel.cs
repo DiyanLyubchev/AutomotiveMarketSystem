@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutomotiveMarketSystem.Service.Dto;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -23,7 +24,7 @@ namespace AutomotiveMarketSystem.Models
         [Required]
         [Range(1, 4)]
         public int EngineTypeId { get; set; }
-        
+
         public int CarBrandId { get; set; }
 
         public int CarModelId { get; set; }
@@ -42,8 +43,13 @@ namespace AutomotiveMarketSystem.Models
 
         public string UserId { get; set; }
 
-        public IFormFile Image { get; set; }
+        public List<IFormFile> Images { get; set; }
+        //public List<IFormFile> Images { get; set; }
 
         public string ImagePath { get; set; }
+
+        public List<string> ImagePaths { get; set; }
+
+        public ICollection<CarImageDto> CarImages { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using AutomotiveMarketSystem.Service.Contracts;
 using AutomotiveMarketSystem.Service.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -65,30 +66,45 @@ namespace AutomotiveMarketSystem.Controllers
             {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-                if (viewModel.Image != null)
+                if (viewModel.Images != null && viewModel.Images.Count > 0)
                 {
-                    var (extension, isValid) = GetFileExtension(viewModel.Image.ContentType);
-
-                    if (!isValid)
+                    foreach (IFormFile image in viewModel.Images)
                     {
-                        TempData["ErrorMessage"] = "Invalid file type, please upload image!";
-                        return RedirectToAction("AddCar", "Car");
-                    }
-                    string destinationFolder = Path.Combine(hostingEnvironment.WebRootPath, "images/cars");
-                    string fileName = Guid.NewGuid().ToString() + "_" + viewModel.Image.FileName;
-                    string imagePath = Path.Combine(destinationFolder, fileName);
-                    viewModel.Image.CopyTo(new FileStream(imagePath, FileMode.Create));
-                    viewModel.ImagePath = $"/images/cars/" + fileName;
-                }
 
+                        var (extension, isValid) = GetFileExtension(image.ContentType);
+
+                        if (!isValid)
+                        {
+                            TempData["ErrorMessage"] = "Invalid file type, please upload image!";
+                            return RedirectToAction("AddCar", "Car");
+                        }
+                        string destinationFolder = Path.Combine(hostingEnvironment.WebRootPath, "images/cars");
+                        string fileName = Guid.NewGuid().ToString() + "_" + image.FileName;
+                        string imagePath = Path.Combine(destinationFolder, fileName);
+                        image.CopyTo(new FileStream(imagePath, FileMode.Create));
+                        if (viewModel.ImagePaths == null)
+                        {
+                            viewModel.ImagePaths = new List<string>();
+                            viewModel.ImagePaths.Add($"/images/cars/" + fileName);
+                        }
+                        else
+                        {
+                            viewModel.ImagePaths.Add($"/images/cars/" + fileName);
+                        }
+                        // viewModel.CarImages.Add(new CarImageDto { ImagePath = viewModel.ImagePath });
+                    }
+                }
 
                 var newCarfromUi = this.mapper.Map<CarDto>(viewModel);
                 newCarfromUi.UserId = userId;
+                //assign image path to DTO
+                //newCarfromUi.ImagePath = viewModel.ImagePath;
+
                 var newCar = await this.carService.AddCar(newCarfromUi);
 
-
-
                 var newCarFromData = this.mapper.Map<CarViewModel>(newCar);
+                newCarFromData.ImagePaths = viewModel.ImagePaths;
+                newCarFromData.Images = viewModel.Images;
 
                 newCarFromData.BrandName = await this.carService.GetBrandNameById(newCar.CarBrandId);
                 newCarFromData.ModelName = await this.carService.GetModelNameById(newCar.CarModelId);
@@ -133,14 +149,13 @@ namespace AutomotiveMarketSystem.Controllers
                 AllCarModel = allmodells,
                 UserId = carDto.UserId,
                 ImagePath = carDto.ImagePath,
-                Image = carDto.Image,
+                Images = carDto.Images,
                 AllCarBrandByModel = carDto.CarBrandId == 0 ?
                     Enumerable.Empty<CarModelViewModel>() : carBrandView
             };
 
             return carViewModel;
         }
-
 
 
         [HttpGet]

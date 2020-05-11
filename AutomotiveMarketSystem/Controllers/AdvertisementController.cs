@@ -69,8 +69,6 @@ namespace AutomotiveMarketSystem.Controllers
                 ProductionYear = carDto.ProductionYear,
                 AllCarModel = allmodells,
                 UserId = carDto.UserId,
-                ImagePath = carDto.ImagePath,
-                Image = carDto.Image,
                 AllCarBrandByModel = carDto.CarBrandId == 0 ?
                     Enumerable.Empty<CarModelViewModel>() : carBrandView
             };

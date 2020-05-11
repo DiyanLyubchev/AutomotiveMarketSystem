@@ -56,7 +56,7 @@ namespace AutomotiveMarketSystem.Service
                         PublishDate = ad.PublishDate,
                         UserName = currentUser.UserName,
                         EngineTypeId = currentCar.EngineTypeId,
-                        ImagePath = currentCar.ImagePath
+                        CarImages = currentCar.CarImages
                     });
                 }
             }

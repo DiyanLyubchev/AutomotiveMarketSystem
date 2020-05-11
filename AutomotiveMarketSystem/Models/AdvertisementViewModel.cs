@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 
 namespace AutomotiveMarketSystem.Models
 {
@@ -23,6 +24,7 @@ namespace AutomotiveMarketSystem.Models
         public DateTime PublishDate { get; set; }
         public bool IsDeleted { get; set; }
         public string ImagePath { get; set; }
+        public IFormFile Image { get; set; }
 
     }
 }

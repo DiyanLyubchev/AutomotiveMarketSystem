@@ -4,7 +4,7 @@ using Oracle.EntityFrameworkCore.Metadata;
 
 namespace AutomotiveMarketSystem.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -209,12 +209,11 @@ namespace AutomotiveMarketSystem.Data.Migrations
                     DOOR = table.Column<int>(type: "NUMBER(10)", nullable: false),
                     PRODUCTIONYEAR = table.Column<DateTime>(type: "DATE", nullable: false),
                     PRICE = table.Column<decimal>(type: "NUMBER", nullable: false),
-                    CARBRANDID = table.Column<int>(type: "NUMBER(10)", nullable: false),
-                    CarModelId = table.Column<int>(nullable: false),
-                    ENGINETYPEID = table.Column<int>(type: "NUMBER(10)", nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
                     USERID = table.Column<string>(nullable: true),
-                    IMAGEPATH = table.Column<string>(nullable: true)
+                    CARBRANDID = table.Column<int>(type: "NUMBER(10)", nullable: false),
+                    CarModelId = table.Column<int>(nullable: false),
+                    ENGINETYPEID = table.Column<int>(type: "NUMBER(10)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -267,18 +266,38 @@ namespace AutomotiveMarketSystem.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CARIMAGE",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Oracle:ValueGenerationStrategy", OracleValueGenerationStrategy.IdentityColumn),
+                    IMAGEPATH = table.Column<string>(type: "NVARCHAR2(100)", nullable: true),
+                    CARID = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CARIMAGE", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CARIMAGE_CAR_CARID",
+                        column: x => x.CARID,
+                        principalTable: "CAR",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Discriminator", "Name", "NormalizedName" },
-                values: new object[] { "ca678235-7571-4177-984f-e9d1957b0187", "eba42604-95fb-47e5-9c32-2d62d2712bce", "UserRole", "Admin", "ADMIN" });
+                values: new object[] { "ca678235-7571-4177-984f-e9d1957b0187", "d057b73e-38a8-4aac-8e41-16faac53efa2", "UserRole", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "c23c3678-6194-4b7e-a928-09614190eb62", 0, "aacb8e88-ce4a-4d37-9037-1e3f240c9ecc", "admin1@admin.com", false, true, null, "ADMIN1@ADMIN.COM", "DIYAN", "AQAAAAEAACcQAAAAEPsRv3fuI/kYSxWKGhEwReaE3Rj28JK/3ZtO9mPIc96K1riVzYZmFw7GlAW1wYN3NA==", null, false, "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN", false, "Diyan" },
-                    { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", 0, "b5bb82ac-732c-4d62-a1e1-fbb50d0df485", "admin2@admin.com", false, true, null, "ADMIN2@ADMIN.COM", "IVAN", "AQAAAAEAACcQAAAAEAJbgp+PdOT8Z/IfoS0bOpxjdgzlo/oZ+M1G55OD2bmd2Tc6DLkcueI2ufRsbqLZhg==", null, false, "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU", false, "Ivan" }
+                    { "c23c3678-6194-4b7e-a928-09614190eb62", 0, "452682ea-9877-470c-a91b-5e6493be2642", "admin1@admin.com", false, true, null, "ADMIN1@ADMIN.COM", "DIYAN", "AQAAAAEAACcQAAAAEAslKWlC1Nb1fODIttGpHb1h/ZLSJy6gEjeb8QLpwkm5Fxw44+uKefigQl9omho+FA==", null, false, "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN", false, "Diyan" },
+                    { "d5b2211a-4ddc-4451-af5e-36b5cfad9a2c", 0, "05320bdf-036f-46ed-a0ff-6924882eac3f", "admin2@admin.com", false, true, null, "ADMIN2@ADMIN.COM", "IVAN", "AQAAAAEAACcQAAAAEMY6MBTE6ba055wzSCuKuFlwY4VmSUHTQbgPC29kOQ5Pet/8VsCAHLHo9SEpKg9SEA==", null, false, "74CLJEIXNYLPRXMVXXNSWXZH6R6KJRRU", false, "Ivan" }
                 });
 
             migrationBuilder.InsertData(
@@ -1299,6 +1318,11 @@ namespace AutomotiveMarketSystem.Data.Migrations
                 column: "USERID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CARIMAGE_CARID",
+                table: "CARIMAGE",
+                column: "CARID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CARMODEL_CARBRANDID",
                 table: "CARMODEL",
                 column: "CARBRANDID");
@@ -1325,13 +1349,16 @@ namespace AutomotiveMarketSystem.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "CARIMAGE");
+
+            migrationBuilder.DropTable(
                 name: "CARMODEL");
 
             migrationBuilder.DropTable(
-                name: "CAR");
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "CAR");
 
             migrationBuilder.DropTable(
                 name: "CARBRAND");

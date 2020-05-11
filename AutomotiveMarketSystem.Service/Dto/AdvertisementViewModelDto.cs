@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutomotiveMarketSystem.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -25,6 +26,6 @@ namespace AutomotiveMarketSystem.Service.Dto
         public DateTime PublishDate { get; set; }
         public bool IsDeleted { get; set; }
 
-        public string ImagePath { get; set; }
+        public ICollection<CarImage> CarImages { get; set; }
     }
 }

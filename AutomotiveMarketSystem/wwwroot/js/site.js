@@ -10,14 +10,26 @@
         });
 };
 
-//$("#advetisement").click(function () {
-//    const carId = $("#advetisement").val();
+//$("#uploadImage").click(function () {
+//    const currentCarId = $("#uploadImage").val();
+//    const carImagePath = $('#imagePath').val();
 
 //    $.ajax({
-//        url: '/Advertisement/CreateAdvertisement',
-//        data: { newCarId: carId },
-//        type: 'Post',
+//        url: '/Car/UploadImage',
+//        data: { imagepath: carImagePath, carId: currentCarId },
+//        type: 'Get',
 //        dataType: 'json',
 //    });
 //});
+
+$(function () {
+    $('#imageUpload').fileupload({
+        dataType: 'json',
+        done: function (e, data) {
+            $.each(data.result.file, function (index, file) {
+                $('<p/>').text(image.name).appendTo(document.body);
+            });
+        }
+    });
+});
 

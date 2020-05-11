@@ -9,8 +9,7 @@ namespace AutomotiveMarketSystem.Service.Dto
         public int Id { get; set; }
 
         public int Door { get; set; }
-        public IEnumerable<int> Doors { get; set; }
-
+        
         public DateTime ProductionYear { get; set; } = DateTime.Now;
 
         public decimal Price { get; set; }
@@ -26,8 +25,12 @@ namespace AutomotiveMarketSystem.Service.Dto
         public int CarModelId { get; set; }
         public bool IsDeleted { get; set; }
         public string UserId { get; set; }
-        public IFormFile Image { get; set; }
 
+        public virtual ICollection<CarImageDto> CarImages { get; set; }
+
+        public IFormFile Image { get; set; }
+        public List<IFormFile> Images { get; set; }
         public string ImagePath { get; set; }
+        public List<string> ImagePaths { get; set; }
     }
 }
