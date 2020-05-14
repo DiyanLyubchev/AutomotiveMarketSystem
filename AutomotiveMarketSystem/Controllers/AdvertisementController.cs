@@ -43,10 +43,15 @@ namespace AutomotiveMarketSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            //var adVMDto = this.mapper.Map<AdvertisementViewModelDto>(advertisementViewModel);
-
-            await this.advertisementService.DeleteAd(id);
-            return RedirectToAction("Index", "Home");
+            try
+            {
+                await this.advertisementService.DeleteAd(id);
+                return RedirectToAction("Index", "Home");
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         private async Task<CarViewModel> GetCarViewModel(CarDto carDto)
